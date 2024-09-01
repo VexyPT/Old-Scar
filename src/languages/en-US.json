@@ -1,0 +1,58 @@
+{
+  "mention": "{{scarEmoji}} Olá {{user}}! O Meu prefixo neste servidor é `{{serverPrefix}}`, para veres os meus comandos, usa `{{serverPrefix}}ajuda`!",
+  "permissions": {
+    "meMissingManageGuildPermission": "{{denyEmoji}} Não tens a permissão `Gerenciar o Servidor`.",
+    "meMissingManageRolesPermission": "{{denyEmoji}} Não tens a permissão `Gerenciar Cargos`.",
+    "otherMissingManageRolesPermission": "{{denyEmoji}} {{user}} não tem a permissão `Gerenciar Cargos`.",
+    "botMissingManageRolesPermission": "{{denyEmoji}} Eu não tenho a permissão `Gerenciar Cargos`.",
+    "guildOnly": "{{denyEmoji}} Este comando apenas pode ser executado em servidores.",
+    "devOnly": "{{denyEmoji}} Acesso negado.",
+    "premiumOnly": "{{denyEmoji}} Acesso negado. Comando exclusivo para usuários **Premium**."
+  },
+  "ping": {
+    "response": "Pong! {{latency}}ms."
+  },
+  "setprefix": {
+    "samePrefix": "{{denyEmoji}} Insere um prefix diferente do atual.",
+    "wrongLenght": "{{denyEmoji}} O prefix apenas pode ter no **máximo** `2` caracteres.",
+    "missingArgs": "{{denyEmoji}} Insere um prefix\n {{rightArrowEmoji}} `{{currentPrefix}} setprefix <novo prefixo>`",
+    "success": "{{checkEmoji}} O novo prefixo `{{newPrefix}}` foi configurado com sucesso."
+  },
+  "setlanguage": {
+    "embedDescription": "Queres o teu nick aqui? Contribui ativamente para as traduções do Scar!",
+    "placeholder": "Seleciona um idioma",
+    "success": "{{checkEmoji}} Idioma alterado com sucesso.",
+    "sameLanguage": "{{denyEmoji}} Não podes alterar para o idioma que já estás."
+  },
+  "serverBadges": {
+    "noBadgesFound": "Nenhuma badge encontrada.",
+    "noMembersFound": "Nenhum membro encontrado.",
+    "pages": "Página {{currentPage}} de {{totalPages}}",
+    "peopleWithTheBadge": "Membros com esta badge no servidor:\n\n> {{pageMembers}}",
+    "embedTitle": "Badges - {{guildName}}"
+  },
+  "badges": {
+    "staff": "Funcionário do Discord",
+    "partner": "Dono de Servidor Parceiro",
+    "certifiedModerator": "Ex-aluno do Programa de Moderação",
+    "hypesquadEvents": "Eventos HypeSquad",
+    "bravery": "HypeSquad Bravery",
+    "brilliance": "HypeSquad Brilliance",
+    "balance": "HypeSquad Balance",
+    "bugHunter1": "Caçador de bugs do Discord",
+    "bugHunter2": "Caçador de bugs do Discord Dourado",
+    "activeDeveloper": "Desenvolvedor Ativo",
+    "earlyVerifiedDev": "Desenvolvedor Verificado de Bots Pioneiro",
+    "earlySupporter": "Apoiador Inicial do Nitro"
+  },
+  "tempRole": {
+    "invalidTime": "{{denyEmoji}} Por favor, usa um limite válido de tempo. Ex: 3m, 2h, 1d",
+    "durationExceedsLimit": "{{denyEmoji}} A duração que você especificou excede o limite permitido. Para usuários não premium, a duração máxima é de 31 dias. Para usuários premium, a duração máxima é de 366 dias. Por favor, escolha uma duração mais curta.",
+    "notEditable": "{{denyEmoji}} Não posso atribuir este cargo porque ele não é gerenciável, ou está acima do meu cargo.",
+    "alreadyHaveTheRole": "{{denyEmoji}} {{user}} já possui este cargo.",
+    "success": {
+      "title": "Cargo Temporário adicionado",
+      "description": "{{roleEmoji}} **Cargo:** {{role}}\n{{memberEmoji}} **Membro:** {{user}}\n{{timeEmoji}} **Expira** <t:{{expiresAt}}:R>"
+    }
+  }
+}
