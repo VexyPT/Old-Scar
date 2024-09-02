@@ -8,7 +8,9 @@
     "guildOnly": "{{denyEmoji}} Este comando apenas pode ser executado em servidores.",
     "devOnly": "{{denyEmoji}} Acesso negado.",
     "premiumOnly": "{{denyEmoji}} Acesso negado. Comando exclusivo para usuários **Premium**.",
-    "blacklisted": "{{denyEmoji}} Acesso negado, estás banido de usar os meus serviços.\n{{postEmoji}} **Motivo:** {{reason}}\n{{timeEmoji}} **Data do Banimento:** {{banDate}}" 
+    "blacklisted": "Você está **Banido** ᕙ(⇀‸↼‶)ᕗ\n\nQue pena... o pobre utilizador conseguiu fazer algo errado... será assim tão difícil seguir as minhas regras?{{supportServer}}\n\n**Motivo:**\n> {{reason}}\n**Duração:** Permanente\n**Banido desde:**\n> {{banDate}}",
+    "blacklistedMessage": "Você está **Banido** ᕙ(⇀‸↼‶)ᕗ\n\nQue pena... o pobre utilizador conseguiu fazer algo errado... será assim tão difícil seguir as minhas regras?{{supportServer}}\n\n**Motivo:**\n> {{reason}}\n**Duração:** Permanente\n\nSe deseja ser desbanido porque acha que foi injusto (duvido que tenha sido injusto, haha) ou se está arrependido (estar arrependido não significa que será desbanido), tente fazer um apelo no meu servidor de suporte: {{supportServer}}\nMas lembre-se: estar arrependido não irá magicamente resolver todos os problemas da sua vida; as suas ações têm consequências e, se fez algo imperdoável, não será desbanido... Ah, e se está banido do meu servidor de suporte... bem, o problema não é meu!\n\nDesculpe pela inconveniência... Ou, se foi banido por um motivo válido, sofra com a inconveniência!!",
+    "unblacklisted": "O seu apelo foi aceite pela equipa e você foi desbanido!\nIsto é algo raro, por isso não desperdice esta oportunidade. Respeite as regras do Scar para não ser banido novamente! {{scarEmoji}}"
   },
   "ping": {
     "response": "Pong! {{latency}}ms."
