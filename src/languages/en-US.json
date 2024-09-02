@@ -7,7 +7,8 @@
     "botMissingManageRolesPermission": "{{denyEmoji}} I don't have the `Manage Roles` permission.",
     "guildOnly": "{{denyEmoji}} This command can only be executed in servers.",
     "devOnly": "{{denyEmoji}} Access denied.",
-    "premiumOnly": "{{denyEmoji}} Access denied. Command exclusive for **Premium** users."
+    "premiumOnly": "{{denyEmoji}} Access denied. Command exclusive for **Premium** users.",
+    "blacklisted": "{{denyEmoji}} Access denied, you are banned from using my services.\n{{postEmoji}} **Reason:** {{reason}}\n{{timeEmoji}} **Ban Date:** {{banDate}}"
   },
   "ping": {
     "response": "Pong! {{latency}}ms."
