@@ -7,7 +7,8 @@
     "botMissingManageRolesPermission": "{{denyEmoji}} Eu não tenho a permissão `Gerenciar Cargos`.",
     "guildOnly": "{{denyEmoji}} Este comando só pode ser executado em servidores.",
     "devOnly": "{{denyEmoji}} Acesso negado.",
-    "premiumOnly": "{{denyEmoji}} Acesso negado. Comando exclusivo para usuários **Premium**."
+    "premiumOnly": "{{denyEmoji}} Acesso negado. Comando exclusivo para usuários **Premium**.",
+    "blacklisted": "{{denyEmoji}} Acesso negado, você está banido de usar meus serviços.\n{{postEmoji}} **Motivo:** {{reason}}\n{{timeEmoji}} **Data do Banimento:** {{banDate}}"
   },
   "ping": {
     "response": "Pong! {{latency}}ms."
