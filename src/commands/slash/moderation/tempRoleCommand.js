@@ -54,87 +54,78 @@ module.exports = {
                 const time = options.getString("duration");
                 const botMember = await guild.members.fetch(interaction.client.user.id);
 
+                const embedError = new EmbedBuilder({
+                  color: color.danger
+                });
+
                 if (!member.permissions.has(PermissionFlagsBits.ManageRoles)) {
-                    return interaction.reply({
-                        content: t("permissions.meMissingManageRolesPermission", {
-                            locale: language,
-                            replacements: {
-                              denyEmoji: e.deny
-                            }
-                        }),
-                        ephemeral: true
-                    });
+                  embedError.setDescription(t("permissions.meMissingManageRolesPermission", {
+                    locale: language,
+                    replacements: {
+                      denyEmoji: e.deny
+                    }
+                  }));
+                  return interaction.reply({ embeds: [embedError], ephemeral: true });
                 }
 
                 if (!botMember.permissions.has(PermissionFlagsBits.ManageRoles)) {
-                  return interaction.reply({
-                      content: t("permissions.botMissingManageRolesPermission", {
-                          locale: language,
-                          replacements: {
-                            denyEmoji: e.deny
-                          }
-                      }),
-                      ephemeral: true
-                  });
-              }
+                  embedError.setDescription(t("permissions.botMissingManageRolesPermission", {
+                    locale: language,
+                    replacements: {
+                      denyEmoji: e.deny
+                    }
+                  }));
+                  return interaction.reply({ embeds: [embedError], ephemeral: true });
+                }
 
                 // Ajuste para lidar com "1y" e definir limites
                 const milliseconds = ms(time) || (time == "1y" ? parseInt(time) * 365 * 24 * 60 * 60 * 1000 : null);
                 if (!milliseconds || milliseconds <= 0) {
-                    return interaction.reply({
-                        content: t("tempRole.invalidTime", {
-                            locale: language,
-                            replacements: {
-                              denyEmoji: e.deny
-                            }
-                        }),
-                        ephemeral: true
-                    });
+                  embedError.setDescription(t("tempRole.invalidTime", {
+                    locale: language,
+                    replacements: {
+                      denyEmoji: e.deny
+                    }
+                  }));
+                  return interaction.reply({ embeds: [embedError], ephemeral: true });
                 }
 
                 const premiumUser = userdb.premium
                 const maxDuration = premiumUser ? 366 * 24 * 60 * 60 * 1000 : 31 * 24 * 60 * 60 * 1000;
 
                 if (milliseconds > maxDuration) {
-                    return interaction.reply({
-                        content: t("tempRole.durationExceedsLimit", {
-                            locale: language,
-                            replacements: {
-                              denyEmoji: e.deny
-                            }
-                        }),
-                        ephemeral: true
-                    });
+                  embedError.setDescription(t("tempRole.durationExceedsLimit", {
+                    locale: language,
+                    replacements: {
+                      denyEmoji: e.deny
+                    }
+                  }));
+                  return interaction.reply({ embeds: [embedError], ephemeral: true });
                 }
 
                 const expiresAt = new Date(Date.now() + milliseconds);
 
                 // Verificar se o cargo é gerenciável
                 if (!guild.roles.cache.get(role.id).editable) {
-                  return interaction.reply({
-                    content: t("tempRole.notEditable", {
-                        locale: language,
-                        replacements: {
-                          denyEmoji: e.deny
-                        }
-                    }),
-                    ephemeral: true
-                  });
+                  embedError.setDescription(t("tempRole.notEditable", {
+                    locale: language,
+                    replacements: {
+                      denyEmoji: e.deny
+                    }
+                  }));
+                  return interaction.reply({ embeds: [embedError], ephemeral: true });
                 }
 
                 // Verificar se o cargo já existe no usuário
                 const memberToAssign = await guild.members.fetch(user.id);
                 if (memberToAssign.roles.cache.has(role.id)) {
-                  return interaction.reply({
-                    content: t("tempRole.alreadyHaveTheRole", {
-                      locale: language,
-                      replacements: {
-                        denyEmoji: e.deny,
-                        user
-                      }
-                    }),
-                    ephemeral: true
-                  });
+                  embedError.setDescription(t("tempRole.alreadyHaveTheRole", {
+                    locale: language,
+                    replacements: {
+                      denyEmoji: e.deny
+                    }
+                  }));
+                  return interaction.reply({ embeds: [embedError], ephemeral: true });
                 }
 
                 await memberToAssign.roles.add(role);
@@ -166,7 +157,7 @@ module.exports = {
                   }),
                 });
 
-                await interaction.reply({ embeds: [embedSuccess] });
+                await interaction.reply({ embeds: [embedSuccess], ephemeral: true });
 
                 break;
             }
