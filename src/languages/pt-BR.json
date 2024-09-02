@@ -1,11 +1,11 @@
 {
-  "mention": "{{scarEmoji}} Olá {{user}}! O Meu prefixo neste servidor é `{{serverPrefix}}`, para veres os meus comandos, usa `{{serverPrefix}}ajuda`!",
+  "mention": "{{scarEmoji}} Olá {{user}}! Meu prefixo neste servidor é `{{serverPrefix}}`. Para ver meus comandos, use `{{serverPrefix}}ajuda`!",
   "permissions": {
-    "meMissingManageGuildPermission": "{{denyEmoji}} Não tens a permissão `Gerenciar o Servidor`.",
-    "meMissingManageRolesPermission": "{{denyEmoji}} Não tens a permissão `Gerenciar Cargos`.",
+    "meMissingManageGuildPermission": "{{denyEmoji}} Você não tem a permissão `Gerenciar o Servidor`.",
+    "meMissingManageRolesPermission": "{{denyEmoji}} Você não tem a permissão `Gerenciar Cargos`.",
     "otherMissingManageRolesPermission": "{{denyEmoji}} {{user}} não tem a permissão `Gerenciar Cargos`.",
     "botMissingManageRolesPermission": "{{denyEmoji}} Eu não tenho a permissão `Gerenciar Cargos`.",
-    "guildOnly": "{{denyEmoji}} Este comando apenas pode ser executado em servidores.",
+    "guildOnly": "{{denyEmoji}} Este comando só pode ser executado em servidores.",
     "devOnly": "{{denyEmoji}} Acesso negado.",
     "premiumOnly": "{{denyEmoji}} Acesso negado. Comando exclusivo para usuários **Premium**."
   },
@@ -13,16 +13,16 @@
     "response": "Pong! {{latency}}ms."
   },
   "setprefix": {
-    "samePrefix": "{{denyEmoji}} Insere um prefix diferente do atual.",
-    "wrongLenght": "{{denyEmoji}} O prefix apenas pode ter no **máximo** `2` caracteres.",
-    "missingArgs": "{{denyEmoji}} Insere um prefix\n {{rightArrowEmoji}} `{{currentPrefix}} setprefix <novo prefixo>`",
+    "samePrefix": "{{denyEmoji}} Insira um prefixo diferente do atual.",
+    "wrongLenght": "{{denyEmoji}} O prefixo só pode ter **no máximo** `2` caracteres.",
+    "missingArgs": "{{denyEmoji}} Insira um prefixo\n {{rightArrowEmoji}} `{{currentPrefix}} setprefix <novo prefixo>`",
     "success": "{{checkEmoji}} O novo prefixo `{{newPrefix}}` foi configurado com sucesso."
   },
   "setlanguage": {
-    "embedDescription": "Queres o teu nick aqui? Contribui ativamente para as traduções do Scar!",
-    "placeholder": "Seleciona um idioma",
+    "embedDescription": "Quer seu nome aqui? Contribua ativamente para as traduções do Scar!",
+    "placeholder": "Selecione um idioma",
     "success": "{{checkEmoji}} Idioma alterado com sucesso.",
-    "sameLanguage": "{{denyEmoji}} Não podes alterar para o idioma que já estás."
+    "sameLanguage": "{{denyEmoji}} Você não pode mudar para o idioma que já está usando."
   },
   "serverBadges": {
     "noBadgesFound": "Nenhuma badge encontrada.",
@@ -39,19 +39,19 @@
     "bravery": "HypeSquad Bravery",
     "brilliance": "HypeSquad Brilliance",
     "balance": "HypeSquad Balance",
-    "bugHunter1": "Caçador de bugs do Discord",
-    "bugHunter2": "Caçador de bugs do Discord Dourado",
+    "bugHunter1": "Caçador de Bugs do Discord",
+    "bugHunter2": "Caçador de Bugs Dourado do Discord",
     "activeDeveloper": "Desenvolvedor Ativo",
     "earlyVerifiedDev": "Desenvolvedor Verificado de Bots Pioneiro",
     "earlySupporter": "Apoiador Inicial do Nitro"
   },
   "tempRole": {
-    "invalidTime": "{{denyEmoji}} Por favor, usa um limite válido de tempo. Ex: 3m, 2h, 1d",
-    "durationExceedsLimit": "{{denyEmoji}} A duração que você especificou excede o limite permitido. Para usuários não premium, a duração máxima é de 31 dias. Para usuários premium, a duração máxima é de 366 dias. Por favor, escolha uma duração mais curta.",
-    "notEditable": "{{denyEmoji}} Não posso atribuir este cargo porque ele não é gerenciável, ou está acima do meu cargo.",
+    "invalidTime": "{{denyEmoji}} Por favor, use um limite de tempo válido. Ex: 3m, 2h, 1d",
+    "durationExceedsLimit": "{{denyEmoji}} A duração especificada excede o limite permitido. Para usuários não premium, a duração máxima é de 31 dias. Para usuários premium, a duração máxima é de 366 dias. Escolha uma duração mais curta.",
+    "notEditable": "{{denyEmoji}} Não posso atribuir este cargo porque ele não é gerenciável ou está acima do meu cargo.",
     "alreadyHaveTheRole": "{{denyEmoji}} {{user}} já possui este cargo.",
     "success": {
-      "title": "Cargo Temporário adicionado",
+      "title": "Cargo Temporário Adicionado",
       "description": "{{roleEmoji}} **Cargo:** {{role}}\n{{memberEmoji}} **Membro:** {{user}}\n{{timeEmoji}} **Expira** <t:{{expiresAt}}:R>"
     }
   }
