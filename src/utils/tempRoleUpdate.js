@@ -3,7 +3,7 @@ const TempRole = require("../models/TempRoleSettings.js");
 let nextCheckTimeout;
 
 const checkExpiredRoles = async (client) => {
-    //console.log("Starting temp role verification...");
+    // console.log("Starting temp role verification...");
 
     const now = new Date();
     const expiredRoles = await TempRole.find({ expiresAt: { $lt: now } });
@@ -11,7 +11,6 @@ const checkExpiredRoles = async (client) => {
 
     for (const role of expiredRoles) {
         try {
-
             const guild = await client.guilds.fetch(role.guildID).catch(error => {
                 console.error(`Error fetching guild ${role.guildID}: ${error}`);
                 return null; // Retorna null se falhar
@@ -44,13 +43,13 @@ const checkExpiredRoles = async (client) => {
             await TempRole.deleteOne({ _id: role._id });
 
             removedCount++;
-            //console.log(`Role removed from ${member.user.tag}`);
+            // console.log(`Role removed from ${member.user.tag}`);
         } catch (error) {
             console.error(`Error processing role ${role.roleID} for member ${role.userID}: ${error}`);
         }
     }
 
-    //console.log(`Verification completed. Roles removed: ${removedCount}`);
+    // console.log(`Verification completed. Roles removed: ${removedCount}`);
 
     scheduleNextCheck(client);
 };
@@ -62,14 +61,13 @@ const scheduleNextCheck = async (client) => {
         const now = Date.now();
         const nextCheckIn = nextRole.expiresAt.getTime() - now;
 
-        //console.log(`Next role expiration check in ${nextCheckIn / 1000} seconds`);
-
-        clearTimeout(nextCheckTimeout); // Limpar qualquer verificação agendada anteriormente
-        nextCheckTimeout = setTimeout(() => checkExpiredRoles(client), Math.max(nextCheckIn, 1000));
+        // Limitar o próximo intervalo a no máximo 24 horas
+        clearTimeout(nextCheckTimeout);
+        nextCheckTimeout = setTimeout(() => checkExpiredRoles(client), Math.min(nextCheckIn, 60000));
     } else {
-        //console.log("No active temp roles found.");
-        clearTimeout(nextCheckTimeout); // Limpar qualquer verificação agendada anteriormente
-        nextCheckTimeout = setTimeout(() => checkExpiredRoles(client), 60000); // Verifique novamente em 60 segundos
+        // Verifique novamente em 24 horas se não houver cargos temporários ativos
+        clearTimeout(nextCheckTimeout);
+        nextCheckTimeout = setTimeout(() => checkExpiredRoles(client), 60000);
     }
 };
 
