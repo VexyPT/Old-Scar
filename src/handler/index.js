@@ -109,6 +109,22 @@ loadSlashCommands(path.join(__dirname, '../commands/slash'));
       return;
     }
 
+    if(userdb.blacklist.isBanned) {
+      return await interaction.reply({
+        content: t("permissions.blacklisted", {
+          locale: userdb.language,
+          replacements: {
+            denyEmoji: e.deny,
+            postEmoji: e.post,
+            reason: userdb.blacklist.reason,
+            timeEmoji: e.time,
+            banDate: `<t:${Math.floor(userdb.blacklist.since.getTime() / 1000)}:R>`
+          }
+        }),
+        ephemeral: false
+      });
+    }
+
     try {
       await command.execute(message, args);
       const userdb = await db.users.get(message.author);
@@ -129,7 +145,7 @@ loadSlashCommands(path.join(__dirname, '../commands/slash'));
       try {
         const userdb = await db.users.get(interaction.user);
         if (command.devOnly && !client.settings.devs.includes(interaction.user.id)) {
-          await interaction.reply({
+          return await interaction.reply({
             content: t("permissions.devOnly", {
               locale: userdb.language,
               replacements: {
@@ -138,11 +154,10 @@ loadSlashCommands(path.join(__dirname, '../commands/slash'));
             }),
             ephemeral: true
           });
-          return;
         }
 
         if (command.devOnly && !client.settings.devs.includes(interaction.user.id)) {
-          await interaction.reply({
+          return await interaction.reply({
             content: t("permissions.devOnly", {
               locale: userdb.language,
               replacements: {
@@ -151,7 +166,22 @@ loadSlashCommands(path.join(__dirname, '../commands/slash'));
             }),
             ephemeral: true
           });
-          return;
+        }
+
+        if(userdb.blacklist.isBanned) {
+          return await interaction.reply({
+            content: t("permissions.blacklisted", {
+              locale: userdb.language,
+              replacements: {
+                denyEmoji: e.deny,
+                postEmoji: e.post,
+                reason: userdb.blacklist.reason,
+                timeEmoji: e.time,
+                banDate: `<t:${Math.floor(userdb.blacklist.since.getTime() / 1000)}:R>`
+              }
+            }),
+            ephemeral: false
+          });
         }
 
         await command.execute(interaction);
