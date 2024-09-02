@@ -109,16 +109,14 @@ loadSlashCommands(path.join(__dirname, '../commands/slash'));
       return;
     }
 
-    if(userdb.blacklist.isBanned) {
+    if(userSettings.blacklist.isBanned) {
       return await interaction.reply({
         content: t("permissions.blacklisted", {
-          locale: userdb.language,
+          locale: userSettings.language,
           replacements: {
-            denyEmoji: e.deny,
-            postEmoji: e.post,
-            reason: userdb.blacklist.reason,
-            timeEmoji: e.time,
-            banDate: `<t:${Math.floor(userdb.blacklist.since.getTime() / 1000)}:R>`
+            supportServer: client.settings.links.supportServer,
+            reason: userSettings.blacklist.reason,
+            banDate: `<t:${Math.floor(userSettings.blacklist.since.getTime() / 1000)}:R>`
           }
         }),
         ephemeral: false
@@ -173,11 +171,9 @@ loadSlashCommands(path.join(__dirname, '../commands/slash'));
             content: t("permissions.blacklisted", {
               locale: userdb.language,
               replacements: {
-                denyEmoji: e.deny,
-                postEmoji: e.post,
-                reason: userdb.blacklist.reason,
-                timeEmoji: e.time,
-                banDate: `<t:${Math.floor(userdb.blacklist.since.getTime() / 1000)}:R>`
+                supportServer: client.settings.links.supportServer,
+                reason: userSettings.blacklist.reason,
+                banDate: `<t:${Math.floor(userSettings.blacklist.since.getTime() / 1000)}:R>`
               }
             }),
             ephemeral: false
