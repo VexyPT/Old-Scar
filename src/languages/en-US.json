@@ -1,58 +1,58 @@
 {
-  "mention": "{{scarEmoji}} Olá {{user}}! O Meu prefixo neste servidor é `{{serverPrefix}}`, para veres os meus comandos, usa `{{serverPrefix}}ajuda`!",
+  "mention": "{{scarEmoji}} Hello {{user}}! My prefix in this server is `{{serverPrefix}}`. To see my commands, use `{{serverPrefix}}help`!",
   "permissions": {
-    "meMissingManageGuildPermission": "{{denyEmoji}} Não tens a permissão `Gerenciar o Servidor`.",
-    "meMissingManageRolesPermission": "{{denyEmoji}} Não tens a permissão `Gerenciar Cargos`.",
-    "otherMissingManageRolesPermission": "{{denyEmoji}} {{user}} não tem a permissão `Gerenciar Cargos`.",
-    "botMissingManageRolesPermission": "{{denyEmoji}} Eu não tenho a permissão `Gerenciar Cargos`.",
-    "guildOnly": "{{denyEmoji}} Este comando apenas pode ser executado em servidores.",
-    "devOnly": "{{denyEmoji}} Acesso negado.",
-    "premiumOnly": "{{denyEmoji}} Acesso negado. Comando exclusivo para usuários **Premium**."
+    "meMissingManageGuildPermission": "{{denyEmoji}} You don't have the `Manage Server` permission.",
+    "meMissingManageRolesPermission": "{{denyEmoji}} You don't have the `Manage Roles` permission.",
+    "otherMissingManageRolesPermission": "{{denyEmoji}} {{user}} doesn't have the `Manage Roles` permission.",
+    "botMissingManageRolesPermission": "{{denyEmoji}} I don't have the `Manage Roles` permission.",
+    "guildOnly": "{{denyEmoji}} This command can only be executed in servers.",
+    "devOnly": "{{denyEmoji}} Access denied.",
+    "premiumOnly": "{{denyEmoji}} Access denied. Command exclusive for **Premium** users."
   },
   "ping": {
     "response": "Pong! {{latency}}ms."
   },
   "setprefix": {
-    "samePrefix": "{{denyEmoji}} Insere um prefix diferente do atual.",
-    "wrongLenght": "{{denyEmoji}} O prefix apenas pode ter no **máximo** `2` caracteres.",
-    "missingArgs": "{{denyEmoji}} Insere um prefix\n {{rightArrowEmoji}} `{{currentPrefix}} setprefix <novo prefixo>`",
-    "success": "{{checkEmoji}} O novo prefixo `{{newPrefix}}` foi configurado com sucesso."
+    "samePrefix": "{{denyEmoji}} Please enter a prefix different from the current one.",
+    "wrongLenght": "{{denyEmoji}} The prefix can only have a **maximum** of `2` characters.",
+    "missingArgs": "{{denyEmoji}} Please enter a prefix\n {{rightArrowEmoji}} `{{currentPrefix}} setprefix <new prefix>`",
+    "success": "{{checkEmoji}} The new prefix `{{newPrefix}}` has been successfully set."
   },
   "setlanguage": {
-    "embedDescription": "Queres o teu nick aqui? Contribui ativamente para as traduções do Scar!",
-    "placeholder": "Seleciona um idioma",
-    "success": "{{checkEmoji}} Idioma alterado com sucesso.",
-    "sameLanguage": "{{denyEmoji}} Não podes alterar para o idioma que já estás."
+    "embedDescription": "Do you want your name here? Actively contribute to Scar's translations!",
+    "placeholder": "Select a language",
+    "success": "{{checkEmoji}} Language changed successfully.",
+    "sameLanguage": "{{denyEmoji}} You can't switch to the language you're already using."
   },
   "serverBadges": {
-    "noBadgesFound": "Nenhuma badge encontrada.",
-    "noMembersFound": "Nenhum membro encontrado.",
-    "pages": "Página {{currentPage}} de {{totalPages}}",
-    "peopleWithTheBadge": "Membros com esta badge no servidor:\n\n> {{pageMembers}}",
+    "noBadgesFound": "No badges found.",
+    "noMembersFound": "No members found.",
+    "pages": "Page {{currentPage}} of {{totalPages}}",
+    "peopleWithTheBadge": "Members with this badge in the server:\n\n> {{pageMembers}}",
     "embedTitle": "Badges - {{guildName}}"
   },
   "badges": {
-    "staff": "Funcionário do Discord",
-    "partner": "Dono de Servidor Parceiro",
-    "certifiedModerator": "Ex-aluno do Programa de Moderação",
-    "hypesquadEvents": "Eventos HypeSquad",
+    "staff": "Discord Staff",
+    "partner": "Server Partner Owner",
+    "certifiedModerator": "Certified Moderator Graduate",
+    "hypesquadEvents": "HypeSquad Events",
     "bravery": "HypeSquad Bravery",
     "brilliance": "HypeSquad Brilliance",
     "balance": "HypeSquad Balance",
-    "bugHunter1": "Caçador de bugs do Discord",
-    "bugHunter2": "Caçador de bugs do Discord Dourado",
-    "activeDeveloper": "Desenvolvedor Ativo",
-    "earlyVerifiedDev": "Desenvolvedor Verificado de Bots Pioneiro",
-    "earlySupporter": "Apoiador Inicial do Nitro"
+    "bugHunter1": "Discord Bug Hunter",
+    "bugHunter2": "Gold Discord Bug Hunter",
+    "activeDeveloper": "Active Developer",
+    "earlyVerifiedDev": "Early Verified Bot Developer",
+    "earlySupporter": "Early Nitro Supporter"
   },
   "tempRole": {
-    "invalidTime": "{{denyEmoji}} Por favor, usa um limite válido de tempo. Ex: 3m, 2h, 1d",
-    "durationExceedsLimit": "{{denyEmoji}} A duração que você especificou excede o limite permitido. Para usuários não premium, a duração máxima é de 31 dias. Para usuários premium, a duração máxima é de 366 dias. Por favor, escolha uma duração mais curta.",
-    "notEditable": "{{denyEmoji}} Não posso atribuir este cargo porque ele não é gerenciável, ou está acima do meu cargo.",
-    "alreadyHaveTheRole": "{{denyEmoji}} {{user}} já possui este cargo.",
+    "invalidTime": "{{denyEmoji}} Please use a valid time limit. Ex: 3m, 2h, 1d",
+    "durationExceedsLimit": "{{denyEmoji}} The duration you specified exceeds the allowed limit. For non-premium users, the maximum duration is 31 days. For premium users, the maximum duration is 366 days. Please choose a shorter duration.",
+    "notEditable": "{{denyEmoji}} I can't assign this role because it is either unmanageable or above my role.",
+    "alreadyHaveTheRole": "{{denyEmoji}} {{user}} already has this role.",
     "success": {
-      "title": "Cargo Temporário adicionado",
-      "description": "{{roleEmoji}} **Cargo:** {{role}}\n{{memberEmoji}} **Membro:** {{user}}\n{{timeEmoji}} **Expira** <t:{{expiresAt}}:R>"
+      "title": "Temporary Role Added",
+      "description": "{{roleEmoji}} **Role:** {{role}}\n{{memberEmoji}} **Member:** {{user}}\n{{timeEmoji}} **Expires** <t:{{expiresAt}}:R>"
     }
   }
 }
