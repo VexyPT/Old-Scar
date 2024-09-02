@@ -8,7 +8,9 @@
     "guildOnly": "{{denyEmoji}} This command can only be executed in servers.",
     "devOnly": "{{denyEmoji}} Access denied.",
     "premiumOnly": "{{denyEmoji}} Access denied. Command exclusive for **Premium** users.",
-    "blacklisted": "{{denyEmoji}} Access denied, you are banned from using my services.\n{{postEmoji}} **Reason:** {{reason}}\n{{timeEmoji}} **Ban Date:** {{banDate}}"
+    "blacklisted": "You are **Banned** ᕙ(⇀‸↼‶)ᕗ\n\nIt's a shame... the poor user managed to do something wrong... is it really so difficult to follow my rules?{{supportServer}}\n\n**Reason:**\n> {{reason}}\n**Duration:** Permanent\n**Banned since:**\n> {{banDate}}",
+    "blacklistedMessage": "You are **Banned** ᕙ(⇀‸↼‶)ᕗ\n\nIt's a shame... the poor user managed to do something wrong... is it really so difficult to follow my rules?{{supportServer}}\n\n**Reason:**\n> {{reason}}\n**Duration:** Permanent\n\nIf you wish to be unbanned because you believe it was unjust (I doubt it was unjust, haha) or if you are remorseful (being remorseful doesn’t mean you will be unbanned), try making an appeal in my support server: {{supportServer}}\nBut remember: being remorseful will not magically fix all the problems in your life; your actions have consequences, and if you did something unforgivable, you will not be unbanned... Oh, and if you are banned from my support server... well, that’s not my problem!\n\nSorry for the inconvenience... Or, if you were banned for a valid reason, suffer the inconvenience!!",
+    "unblacklisted": "Your appeal has been accepted by the team and you have been unbanned!\nThis is something rare, so don’t waste this opportunity. Follow Scar's rules to avoid being banned again! {{scarEmoji}}"
   },
   "ping": {
     "response": "Pong! {{latency}}ms."
