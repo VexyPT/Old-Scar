@@ -5,7 +5,11 @@ const userSchema = new Schema({
   language: { type: String, default: "pt-BR" },
   executedCommands: { type: Number, default: 0 },
   premium: { type: Boolean, default: false },
-  blacklist: { type: Boolean, default: false }
+  blacklist: {
+    isBanned: { type: Boolean, default: false },
+    since: { type: Date, default: null },
+    reason: { type: String, default: null }
+  }
 });
 
 module.exports = model("UserSettings", userSchema);
