@@ -159,12 +159,12 @@ module.exports = {
 
                     const buttons = new ActionRowBuilder().addComponents(
                         new ButtonBuilder()
-                            .setCustomId("prev")
+                            .setCustomId("ServerBadges_prev")
                             .setEmoji(eId.leftArrow)
                             .setStyle(ButtonStyle.Secondary)
                             .setDisabled(currentPage === 0),
                         new ButtonBuilder()
-                            .setCustomId("next")
+                            .setCustomId("ServerBadges_next")
                             .setEmoji(eId.rightArrow)
                             .setStyle(ButtonStyle.Secondary)
                             .setDisabled(currentPage === totalPages - 1)
@@ -176,21 +176,21 @@ module.exports = {
                     const buttonCollector = message.createMessageComponentCollector({ componentType: ComponentType.Button, time: 60000 });
 
                     buttonCollector.on("collect", async (buttonInteraction) => {
-                        if (buttonInteraction.customId === "prev" && currentPage > 0) {
+                        if (buttonInteraction.customId === "ServerBadges_prev" && currentPage > 0) {
                             currentPage--;
-                        } else if (buttonInteraction.customId === "next" && currentPage < totalPages - 1) {
+                        } else if (buttonInteraction.customId === "ServerBadges_next" && currentPage < totalPages - 1) {
                             currentPage++;
                         }
 
                         const newEmbedResponse = await getEmbed(currentPage);
                         const newButtons = new ActionRowBuilder().addComponents(
                             new ButtonBuilder()
-                                .setCustomId("prev")
+                                .setCustomId("ServerBadges_prev")
                                 .setEmoji(eId.leftArrow)
                                 .setStyle(ButtonStyle.Secondary)
                                 .setDisabled(currentPage === 0),
                             new ButtonBuilder()
-                                .setCustomId("next")
+                                .setCustomId("ServerBadges_next")
                                 .setEmoji(eId.rightArrow)
                                 .setStyle(ButtonStyle.Secondary)
                                 .setDisabled(currentPage === totalPages - 1)
