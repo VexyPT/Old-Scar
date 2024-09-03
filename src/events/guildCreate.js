@@ -44,7 +44,7 @@ module.exports = {
         }
 
         try {
-            await db.guilds.update(guild, {}); // Cria um documento com as configurações padrão
+            await db.guilds.get(guild);
         } catch (error) {
             console.error("Erro ao criar configurações padrão para o servidor:", error.message);
         }
