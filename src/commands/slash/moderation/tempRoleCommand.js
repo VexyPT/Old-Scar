@@ -1,4 +1,6 @@
-const { ApplicationCommandOptionType, PermissionFlagsBits, EmbedBuilder } = require("discord.js");
+const { ApplicationCommandOptionType, PermissionFlagsBits, EmbedBuilder,
+  ActionRowBuilder, ButtonBuilder, ButtonStyle
+ } = require("discord.js");
 const ms = require("ms");
 const TempRole = require("../../../models/TempRoleSettings.js");
 const { t, e, eId, db, color } = require("../../../utils");
@@ -47,16 +49,16 @@ module.exports = {
         const userdb = await db.users.get(interaction.user);
         const language = userdb.language;
 
+        const embedError = new EmbedBuilder({
+          color: color.danger
+        });
+
         switch (options.getSubcommand()) {
             case "add": {
                 const user = options.getUser("user");
                 const role = options.getRole("role");
                 const time = options.getString("duration");
                 const botMember = await guild.members.fetch(interaction.client.user.id);
-
-                const embedError = new EmbedBuilder({
-                  color: color.danger
-                });
 
                 if (!member.permissions.has(PermissionFlagsBits.ManageRoles)) {
                   embedError.setDescription(t("permissions.meMissingManageRolesPermission", {
@@ -163,17 +165,116 @@ module.exports = {
             }
 
             case "list": {
+                if (!member.permissions.has(PermissionFlagsBits.ManageRoles)) {
+                    embedError.setDescription(t("permissions.meMissingManageRolesPermission", {
+                      locale: language,
+                      replacements: {
+                        denyEmoji: e.deny
+                      }
+                    }));
+                    return interaction.reply({ embeds: [embedError], ephemeral: true });
+                }
+
                 const roles = await TempRole.find({ guildID: guild.id });
 
                 if (!roles.length) {
-                    return interaction.reply('No active temporary roles found.');
+                  embedError.setDescription(t("tempRole.noActiveRoles", {
+                    locale: language,
+                    replacements: {
+                      denyEmoji: e.deny
+                    }
+                  }));
+                  return interaction.reply({ embeds: [embedError], ephemeral: true });
                 }
 
-                const list = roles.map(role => {
-                    return `<@${role.userID}> - <@&${role.roleID}> expires in <t:${Math.floor(role.expiresAt.getTime() / 1000)}:R>`;
-                }).join("\n");
+                const perPage = 5;
+                const totalPages = Math.ceil(roles.length / perPage);
+                let currentPage = 0;
 
-                await interaction.reply(list);
+                const generatedEmbed = (page) => {
+                  const start = page * perPage;
+                  const end = start + perPage;
+
+                  const roleList = roles.slice(start, end).map(role => {
+                    return t("tempRole.list", {
+                      locale: language,
+                      replacements: {
+                        roleUserID: role.userID,
+                        roleID: role.roleID,
+                        expiresAt: Math.floor(role.expiresAt.getTime() / 1000)
+                      }
+                    });
+                  }).join("\n");
+
+                  return new EmbedBuilder({
+                    color: color.default,
+                    title: t("tempRole.listed.title", { locale: language }),
+                    description: roleList || t("tempRole.listed.descriptionNotRole", { locale: language }),
+                    footer: {
+                      text: t("tempRole.listed.footer", {
+                        locale: language,
+                        replacements: { currentPage: page + 1, totalPages }
+                      })
+                    }
+                  });
+                }  
+
+                const buttons = new ActionRowBuilder().addComponents(
+                  new ButtonBuilder({
+                    customId: "tempRole_previous",
+                    emoji: eId.leftArrow,
+                    style: ButtonStyle.Secondary,
+                    disabled: currentPage === 0
+                  }),
+                  new ButtonBuilder({
+                    customId: "tempRole_next",
+                    emoji: eId.rightArrow,
+                    style: ButtonStyle.Secondary,
+                    disabled: currentPage === totalPages -1
+                  }),
+                );
+
+                const message = await interaction.reply({
+                  embeds: [generatedEmbed(currentPage)],
+                  components: [buttons],
+                  fetchReply: true,
+                  ephemeral: true
+                });
+
+                const collector = message.createMessageComponentCollector({ time: 120000 });
+
+                collector.on("collect", async i => {
+                  
+                  if (i.customId === "previous" && currentPage > 0) {
+                    currentPage--;
+                  } else if (i.customId === "next" && currentPage < totalPages -1) {
+                    currentPage++;
+                  }
+
+                  await i.update({
+                    embeds: [generatedEmbed(currentPage)],
+                    components: [
+                      new ActionRowBuilder().addComponents(
+                        new ButtonBuilder({
+                          customId: "tempRole_previous",
+                          emoji: eId.leftArrow,
+                          style: ButtonStyle.Secondary,
+                          disabled: currentPage === 0
+                        }),
+                        new ButtonBuilder({
+                          customId: "tempRole_next",
+                          emoji: eId.rightArrow,
+                          style: ButtonStyle.Secondary,
+                          disabled: currentPage === totalPages -1
+                        }),
+                      )
+                    ]
+                  });
+                });
+
+                collector.on('end', () => {
+                  message.edit({ components: [] });
+                });
 
                 break;
             }
