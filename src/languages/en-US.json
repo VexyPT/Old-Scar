@@ -56,6 +56,13 @@
     "success": {
       "title": "Temporary Role Added",
       "description": "{{roleEmoji}} **Role:** {{role}}\n{{memberEmoji}} **Member:** {{user}}\n{{timeEmoji}} **Expires** <t:{{expiresAt}}:R>"
+    },
+    "noActiveRoles": "{{denyEmoji}} No active temporary roles found.",
+    "list": "<@{{roleUserID}}> - <@&{{roleID}}> expires <t:{{expiresAt}}:R>",
+    "listed": {
+      "title": "Active Temporary Roles",
+      "descriptionNotRole": "No active temporary roles on this page.",
+      "footer": "Page {{currentPage}} of {{totalPages}}"
     }
   }
 }

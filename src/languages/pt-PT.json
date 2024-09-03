@@ -56,6 +56,13 @@
     "success": {
       "title": "Cargo Temporário adicionado",
       "description": "{{roleEmoji}} **Cargo:** {{role}}\n{{memberEmoji}} **Membro:** {{user}}\n{{timeEmoji}} **Expira** <t:{{expiresAt}}:R>"
+    },
+    "noActiveRoles": "{{denyEmoji}} Nenhum cargo temporário ativo encontrado.",
+    "list": "<@{{roleUserID}}> - <@&{{roleID}}> expira <t:{{expiresAt}}:R>",
+    "listed": {
+      "title": "Cargos Temporários Ativos",
+      "descriptionNotRole": "Nenhum cargo temporário ativo nesta página.",
+      "footer": "Página {{currentPage}} de {{totalPages}}"
     }
   }
 }
