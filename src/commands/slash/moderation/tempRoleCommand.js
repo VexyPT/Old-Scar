@@ -1,6 +1,16 @@
-const { ApplicationCommandOptionType, PermissionFlagsBits, EmbedBuilder,
-  ActionRowBuilder, ButtonBuilder, ButtonStyle
- } = require("discord.js");
+const {
+  ApplicationCommandOptionType,
+  PermissionFlagsBits,
+  EmbedBuilder,
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  StringSelectMenuBuilder,
+  ModalBuilder,
+  TextInputBuilder,
+  TextInputStyle,
+  ComponentType
+} = require("discord.js");
 const ms = require("ms");
 const TempRole = require("../../../models/TempRoleSettings.js");
 const { t, e, eId, db, color } = require("../../../utils");
@@ -38,9 +48,22 @@ module.exports = {
             ]
         },
         {
-            name: "list",
-            description: "Show the active temporary roles",
-            type: ApplicationCommandOptionType.Subcommand
+          name: "list",
+          description: "Show the active temporary roles",
+          type: ApplicationCommandOptionType.Subcommand
+        },
+        {
+          name: "manage",
+          description: "Manage a temprole",
+          type: ApplicationCommandOptionType.Subcommand,
+          options: [
+            {
+              name: "user",
+              description: "select a user to manage the temprole",
+              type: ApplicationCommandOptionType.User,
+              required: true
+            }
+          ]
         }
     ],
     devOnly: false,
@@ -55,9 +78,9 @@ module.exports = {
 
         switch (options.getSubcommand()) {
             case "add": {
-                const user = options.getUser("user");
-                const role = options.getRole("role");
-                const time = options.getString("duration");
+                const user = options.getUser("user", true);
+                const role = options.getRole("role", true);
+                const time = options.getString("duration", true);
                 const botMember = await guild.members.fetch(interaction.client.user.id);
 
                 if (!member.permissions.has(PermissionFlagsBits.ManageRoles)) {
@@ -137,7 +160,8 @@ module.exports = {
                     userID: user.id,
                     roleID: role.id,
                     guildID: guild.id,
-                    expiresAt
+                    expiresAt,
+                    staffID: member.id
                 });
 
                 await tempRole.save();
@@ -279,6 +303,187 @@ module.exports = {
 
                 break;
             }
+
+            case "manage": {
+              const user = options.getUser("user", true);
+            
+              if (!member.permissions.has(PermissionFlagsBits.ManageRoles)) {
+                embedError.setDescription(t("permissions.meMissingManageRolesPermission", {
+                  locale: language,
+                  replacements: {
+                    denyEmoji: e.deny
+                  }
+                }));
+                return interaction.reply({ embeds: [embedError], ephemeral: true });
+              }
+            
+              const tempRoles = await TempRole.find({ guildID: guild.id, userID: user.id });
+            
+              if (!tempRoles.length) {
+                embedError.setDescription(t("tempRole.noRolesForUser", {
+                  locale: language,
+                  replacements: {
+                    denyEmoji: e.deny,
+                    user
+                  }
+                }));
+                return interaction.reply({ embeds: [embedError], ephemeral: true });
+              }
+            
+              // Criação do Select Menu sem uso de async
+              const selectMenu = new StringSelectMenuBuilder({
+                customId: "tempRole_manage_select",
+                placeholder: t("tempRole.manage.manageSelect.placeholder", { locale: language }),
+                options: tempRoles.map(role => {
+                  const guildRole = guild.roles.cache.get(role.roleID);
+                  const roleName = guildRole ? guildRole.name : "Cargo não encontrado";
+            
+                  return {
+                    label: roleName,
+                    value: role.id
+                  };
+                })
+              });
+            
+              const actionRow = new ActionRowBuilder().addComponents(selectMenu);
+            
+              const embed = new EmbedBuilder({
+                color: color.default,
+                title: t("tempRole.manage.title", { locale: language }),
+                description: t("tempRole.manage.description", {
+                  locale: language,
+                  replacements: { user }
+                })
+              });
+            
+              await interaction.reply({
+                embeds: [embed],
+                components: [actionRow],
+                ephemeral: true
+              });
+            
+              const collector = interaction.channel.createMessageComponentCollector({
+                componentType: ComponentType.StringSelect,
+                time: 120000 // 2 minutos
+              });
+            
+              collector.on('collect', async i => {
+                if (i.user.id !== interaction.user.id) {
+                  return i.reply({ content: t("tempRole.manage.notYourCommand", { locale: language }), ephemeral: true });
+                }
+            
+                const selectedRoleId = i.values[0];
+                const selectedRole = tempRoles.find(role => role.id === selectedRoleId);
+            
+                if (!selectedRole) {
+                  return i.reply({ content: t("tempRole.manage.invalidRole", { locale: language }), ephemeral: true });
+                }
+            
+                const actionButtons = new ActionRowBuilder().addComponents(
+                  new ButtonBuilder()
+                    .setCustomId(`tempRole_manage_remove_${selectedRole.id}`)
+                    .setLabel(t("tempRole.manage.manageRemove.label", { locale: language }))
+                    .setStyle(ButtonStyle.Danger),
+                  new ButtonBuilder()
+                    .setCustomId(`tempRole_manage_edit_${selectedRole.id}`)
+                    .setLabel(t("tempRole.manage.manageEdit.label", { locale: language }))
+                    .setStyle(ButtonStyle.Primary)
+                );
+            
+                const roleEmbed = new EmbedBuilder({
+                  color: color.default,
+                  title: t("tempRole.manage.manageSelected.title", { locale: language }),
+                  description: t("tempRole.manage.manageSelected.description", {
+                    locale: language,
+                    replacements: {
+                      roleID: selectedRole.roleID,
+                      expiresAt: Math.floor(selectedRole.expiresAt.getTime() / 1000)
+                    }
+                  })
+                });
+            
+                await i.update({
+                  embeds: [roleEmbed],
+                  components: [actionButtons]
+                });
+            
+                const buttonCollector = i.channel.createMessageComponentCollector({
+                  componentType: ComponentType.Button,
+                  time: 120000 // 2 minutos
+                });
+            
+                buttonCollector.on('collect', async buttonInteraction => {
+                  if (buttonInteraction.user.id !== interaction.user.id) {
+                    return buttonInteraction.reply({ content: t("tempRole.manage.notYourCommand", { locale: language }), ephemeral: true });
+                  }
+            
+                  const customId = buttonInteraction.customId;
+            
+                  if (customId.startsWith("tempRole_manage_remove_")) {
+                    const selectedRoleId = customId.split("_").pop();
+                    await TempRole.findByIdAndDelete(selectedRoleId);
+            
+                    const memberToRemoveRole = await guild.members.fetch(user.id);
+                    const roleToRemove = guild.roles.cache.get(tempRoles.find(role => role.id === selectedRoleId)?.roleID);
+            
+                    if (roleToRemove) {
+                      await memberToRemoveRole.roles.remove(roleToRemove);
+                    }
+            
+                    const embedSuccess = new EmbedBuilder({
+                      color: color.default,
+                      title: t("tempRole.manage.removedSuccess.title", { locale: language }),
+                      description: t("tempRole.manage.removedSuccess.description", {
+                        locale: language,
+                        replacements: {
+                          role: roleToRemove,
+                          user
+                        }
+                      }),
+                    });
+            
+                    await buttonInteraction.update({
+                      embeds: [embedSuccess],
+                      components: []
+                    });
+                  } else if (customId.startsWith("tempRole_manage_edit_")) {
+                    const selectedRoleId = customId.split("_").pop();
+                    const modal = new ModalBuilder()
+                      .setCustomId(`tempRole_manage_edit_modal_${selectedRoleId}`)
+                      .setTitle(t("tempRole.manage.manageEdit.modalTitle", { locale: language }));
+            
+                    const timeInput = new TextInputBuilder()
+                      .setCustomId("tempRole_manage_edit_time")
+                      .setLabel(t("tempRole.manage.manageEdit.modalTimeLabel", { locale: language }))
+                      .setStyle(TextInputStyle.Short)
+                      .setPlaceholder("e.g., 5m, 3h, 1d, 1y")
+                      .setRequired(true);
+            
+                    const timeInputRow = new ActionRowBuilder().addComponents(timeInput);
+            
+                    modal.addComponents(timeInputRow);
+            
+                    try {
+                      await buttonInteraction.showModal(modal);
+                    } catch (error) {
+                      console.error("Error showing modal:", error);
+                      await buttonInteraction.reply({ content: "Ocorreu um erro ao abrir o modal.", ephemeral: true });
+                    }
+                  }
+                });
+            
+                buttonCollector.on('end', () => {
+                  i.editReply({ components: [] });
+                });
+              });
+            
+              collector.on('end', () => {
+                interaction.editReply({ components: [] });
+              });
+            
+              break;
+            }
+            
         }
     }
 };
