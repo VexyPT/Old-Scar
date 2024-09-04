@@ -124,7 +124,8 @@ module.exports = {
                   embedError.setDescription(t("tempRole.alreadyHaveTheRole", {
                     locale: language,
                     replacements: {
-                      denyEmoji: e.deny
+                      denyEmoji: e.deny,
+                      user
                     }
                   }));
                   return interaction.reply({ embeds: [embedError], ephemeral: true });
