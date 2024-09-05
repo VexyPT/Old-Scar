@@ -92,7 +92,11 @@
         "title": "Duração Atualizada",
         "description": "{{role}} agora expira em <t:{{newExpiresAt}}:R>"
       },
-      "invaliedRole": "Cargo inválido"
+      "removedSucess": {
+        "description": "{{checkEmoji}} {{roleToRemove}} removido com sucesso de {{user}}"
+      },
+      "invaliedRole": "Cargo inválido",
+      "notHaveRoleToRemove": "{{denyEmoji}} Não encontrei nenhum cargo para remover."
     }
   }
 }
