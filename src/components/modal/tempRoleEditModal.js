@@ -30,7 +30,6 @@ const tempRoleEditModal = new Component({
 
     const milliseconds = ms(timeInput) || (timeInput === "1y" ? 365 * 24 * 60 * 60 * 1000 : null);
 
-    // Verifica se a duração é válida
     if (!milliseconds || milliseconds <= 0) {
       embedError.setDescription(t("tempRole.invalidTime", { locale: language, replacements: { denyEmoji: e.deny } }));
       return interaction.reply({
@@ -39,8 +38,7 @@ const tempRoleEditModal = new Component({
       });
     }
 
-    // Verifica se a duração é menor que 5 minutos
-    const minimumDuration = 5 * 60 * 1000; // 5 minutos em milissegundos
+    const minimumDuration = 5 * 60 * 1000;
     if (milliseconds < minimumDuration) {
       embedError.setDescription(t("tempRole.minimumTimeRequirement", { locale: language, replacements: { denyEmoji: e.deny } }));
       return interaction.reply({
@@ -52,7 +50,6 @@ const tempRoleEditModal = new Component({
     const premiumGuild = guildDB.premium;
     const maxDuration = premiumGuild ? 366 * 24 * 60 * 60 * 1000 : 31 * 24 * 60 * 60 * 1000;
 
-    // Verifica se a duração excede o limite máximo
     if (milliseconds > maxDuration) {
       embedError.setDescription(t("tempRole.durationExceedsLimit", { locale: language, replacements: { denyEmoji: e.deny } }));
       return interaction.reply({
@@ -61,12 +58,32 @@ const tempRoleEditModal = new Component({
       });
     }
 
-    // Atualizando a data de expiração do cargo temporário
     const newExpiresAt = new Date(Date.now() + milliseconds);
     selectedRole.expiresAt = newExpiresAt;
     await selectedRole.save();
 
     const guildRole = guild.roles.cache.get(selectedRole.roleID);
+
+    const embed = new EmbedBuilder({
+      color: color.default,
+      title: t("tempRole.manage.details.title", { locale: language }),
+      description: t("tempRole.manage.details.description", {
+        locale: language,
+        replacements: {
+          brushEmoji: e.brush,
+          role: guildRole,
+          gearEmoji: e.gear,
+          staffID: selectedRole.staffID,
+          timeEmoji: e.time,
+          expiresAt: Math.floor(newExpiresAt.getTime() / 1000) // Correção aqui
+        }
+      })
+    });
+
+    await interaction.update({
+      embeds: [embed],
+      ephemeral: true
+    });
 
     embedError.setColor(color.success);
     embedError.setDescription(t("tempRole.manage.editSuccess.description", {
@@ -74,13 +91,12 @@ const tempRoleEditModal = new Component({
       replacements: {
         checkEmoji: e.check,
         role: guildRole,
-        newExpiresAt: Math.floor(newExpiresAt.getTime() / 1000)
+        newExpiresAt: Math.floor(newExpiresAt.getTime() / 1000) // Correção aqui
       }
     }));
 
     await interaction.followUp({
-      embeds: [embedError], // irónico
-      components: [],
+      embeds: [embedError],
       ephemeral: true
     });
   }

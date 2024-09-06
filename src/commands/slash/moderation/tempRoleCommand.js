@@ -14,7 +14,7 @@ const { t, e, eId, db, color } = require("../../../utils");
 module.exports = {
     name: "temprole",
     name_localizations: {
-      "pt-BR": "cargo-temporário"
+      "pt-BR": "cargo-temporario"
     },
     description: "Adds a temporary role to a user",
     description_localizations: {
@@ -27,6 +27,9 @@ module.exports = {
               "pt-BR": "adicionar"
             },
             description: "Add a temporary role",
+            description_localizations: {
+              "pt-BR": "Adiciona um cargo temporario"
+            },
             type: ApplicationCommandOptionType.Subcommand,
             options: [
                 {
@@ -416,7 +419,6 @@ module.exports = {
 
                   return {
                     label: roleName,
-                    emoji: e.gear,
                     value: role.id
                   }
                 })

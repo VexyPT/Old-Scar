@@ -50,7 +50,7 @@ const tempRoleManageSelect = new Component({
       type: ComponentType.Button,
       customId: `tempRole_manage_remove_${selectedRole.id}`,
       label: t("tempRole.manage.remove.label", { locale: language }),
-      emoji: eId.undo,
+      emoji: eId.whiteTrash,
       style: ButtonStyle.Danger
     };
 
@@ -58,7 +58,7 @@ const tempRoleManageSelect = new Component({
       type: ComponentType.Button,
       customId: `tempRole_manage_edit_${selectedRole.id}`,
       label: t("tempRole.manage.edit.buttonLabel", { locale: language }),
-      emoji: eId.time,
+      emoji: eId.editPencil,
       style: ButtonStyle.Primary
     };
 
