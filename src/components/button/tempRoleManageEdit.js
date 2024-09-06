@@ -1,5 +1,5 @@
-const { ComponentType, ModalBuilder, TextInputBuilder, TextInputStyle } = require("discord.js");
-const { t } = require("../../utils");
+const { ComponentType, ModalBuilder, TextInputBuilder, TextInputStyle, EmbedBuilder } = require("discord.js");
+const { t, db, color } = require("../../utils");
 const TempRole = require("../../models/TempRoleSettings.js");
 const Component = require("../../utils/component.js");
 
@@ -9,21 +9,34 @@ const tempRoleManageEdit = new Component({
   async run(interaction) {
     const selectedRoleId = interaction.customId.split('_').pop();
     const selectedRole = await TempRole.findById(selectedRoleId);
+    const userdb = await db.users.get(interaction.user);
+    const language = userdb.language
+
+    const embedError = new EmbedBuilder({
+      color: color.danger
+    });
 
     if (!selectedRole) {
-      return interaction.reply({ content: "Cargo temporário não encontrado.", ephemeral: true });
+      embedError.setDescription(t("tempRole.invalidRole", {
+        locale: language,
+        replacements: {
+          denyEmoji: e.deny
+        }
+      }));
+
+      return interaction.reply({ embeds: [embedError], ephemeral: true });
     }
 
     const modal = new ModalBuilder()
       .setCustomId(`tempRole_edit_modal_${selectedRole.id}`)
-      .setTitle(t("tempRole.manage.edit.modal.title", { locale: interaction.locale }));
+      .setTitle(t("tempRole.manage.edit.modalTitle", { locale: language }));
 
     const timeInput = new TextInputBuilder()
       .setCustomId("timeInput")
-      .setLabel(t("tempRole.manage.edit.modal.time.label", { locale: interaction.locale }))
+      .setLabel(t("tempRole.manage.edit.modalLabel", { locale: language }))
       .setStyle(TextInputStyle.Short)
       .setRequired(true)
-      .setPlaceholder(t("tempRole.manage.edit.modal.time.placeholder", { locale: interaction.locale }));
+      .setPlaceholder(t("tempRole.manage.edit.modalPlaceHolder", { locale: language }));
 
     modal.addComponents(new ActionRowBuilder().addComponents(timeInput));
 

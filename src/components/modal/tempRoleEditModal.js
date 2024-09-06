@@ -1,5 +1,5 @@
 const { ComponentType } = require("discord.js");
-const { t, db, e } = require("../../utils");
+const { t, db, e, color } = require("../../utils");
 const TempRole = require("../../models/TempRoleSettings.js");
 const Component = require("../../utils/component.js");
 const ms = require("ms");
@@ -15,9 +15,16 @@ const tempRoleEditModal = new Component({
     const userdb = await db.users.get(user);
     const language = userdb.language;
 
+    const embedError = new EmbedBuilder({
+      color: color.danger
+    });
+
     if (!selectedRole) {
+
+      embedError.setDescription(t("tempRole.manage.roleNotFound", { locale: language, replacements: { denyEmoji: e.deny } }))
+
       return interaction.reply({
-        content: t("tempRole.manage.roleNotFound", { locale: language }),
+        embeds: [embedError],
         ephemeral: true
       });
     }
@@ -25,8 +32,11 @@ const tempRoleEditModal = new Component({
     const milliseconds = ms(timeInput) || (timeInput === "1y" ? 365 * 24 * 60 * 60 * 1000 : null);
     
     if (!milliseconds || milliseconds <= 0) {
+
+      embedError.setDescription(t("tempRole.invalidTime", { locale: language, replacements: { denyEmoji: e.deny } }))
+
       return interaction.reply({
-        content: t("tempRole.invalidTime", { locale: language, replacements: { denyEmoji: e.deny } }),
+        embeds: [embedError],
         ephemeral: true
       });
     }
@@ -36,8 +46,11 @@ const tempRoleEditModal = new Component({
     const maxDuration = premiumUser ? 366 * 24 * 60 * 60 * 1000 : 31 * 24 * 60 * 60 * 1000;
 
     if (milliseconds > maxDuration) {
+
+      embedError.setDescription(t("tempRole.durationExceedsLimit", { locale: language, replacements: { denyEmoji: e.deny } }))
+
       return interaction.reply({
-        content: t("tempRole.durationExceedsLimit", { locale: language, replacements: { denyEmoji: e.deny } }),
+        embeds: [embedError],
         ephemeral: true
       });
     }
@@ -48,18 +61,21 @@ const tempRoleEditModal = new Component({
     await selectedRole.save();
 
     const guildRole = guild.roles.cache.get(selectedRole.roleID);
-    const roleName = guildRole ? guildRole.name : "Cargo não encontrado";
+
+    embedError.setColor(color.success);
+    embedError.setDescription(t("tempRole.manage.editSuccess.description", {
+      locale: language,
+      replacements: {
+        checkEmoji: e.check,
+        role: guildRole,
+        newExpiresAt: Math.floor(newExpiresAt.getTime() / 1000)
+      }
+    }));
+    embedError.setTitle(t("tempRole.manage.editSuccess.description", { locale: language}));
 
     await interaction.update({
-      content: t("tempRole.manage.edit.success", {
-        locale: language,
-        replacements: {
-          roleName,
-          expiresAt: `<t:${Math.floor(newExpiresAt.getTime() / 1000)}:F>`,
-        }
-      }),
+      embeds: [embedError], // irónico
       components: [],
-      embeds: [],
       ephemeral: true
     });
   }

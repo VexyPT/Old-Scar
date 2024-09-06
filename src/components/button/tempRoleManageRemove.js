@@ -1,5 +1,5 @@
-const { ComponentType } = require("discord.js");
-const { t, db } = require("../../utils");
+const { ComponentType, EmbedBuilder } = require("discord.js");
+const { t, db, color, e } = require("../../utils");
 const TempRole = require("../../models/TempRoleSettings.js");
 const Component = require("../../utils/component.js");
 
@@ -12,40 +12,90 @@ const tempRoleManageRemove = new Component({
     const { guild } = interaction;
     const userdb = await db.users.get(interaction.user);
     const language = userdb.language;
+    
+    const embedError = new EmbedBuilder({
+      color: color.danger
+    });
 
     if (!selectedRole) {
-      return interaction.reply({ content: "Cargo temporário não encontrado.", ephemeral: true });
+      embedError.setDescription(t("tempRole.invalidRole", {
+        locale: language,
+        replacements: {
+          denyEmoji: e.deny
+        }
+      }));
+
+      return interaction.reply({ embeds: [embedError], ephemeral: true });
     }
 
     const guildRole = guild.roles.cache.get(selectedRole.roleID);
     if (!guildRole) {
-      return interaction.reply({ content: "Cargo não encontrado no servidor.", ephemeral: true });
+      embedError.setDescription(t("tempRole.roleNotFound", {
+        locale: language,
+        replacements: {
+          denyEmoji: e.deny
+        }
+      }));
+
+      return interaction.reply({ embeds: [embedError], ephemeral: true });
     }
 
     try {
       const member = await guild.members.fetch(selectedRole.userID);
       if (!member) {
-        return interaction.reply({ content: "Membro não encontrado no servidor.", ephemeral: true });
+        embedError.setDescription(t("tempRole.noMemberFounded", {
+          locale: language,
+          replacements: {
+            denyEmoji: e.deny
+          }
+        }));
+  
+        return interaction.reply({ embeds: [embedError], ephemeral: true });
       }
 
       // Verifica se o cargo está realmente atribuído ao membro
       if (member.roles.cache.has(guildRole.id)) {
         await member.roles.remove(guildRole);
         await TempRole.findByIdAndDelete(selectedRoleId);
+        embedError.setColor(color.success);
+        embedError.setDescription(t("tempRole.manage.removedSuccess", {
+          locale: language,
+          replacements: {
+            checkEmoji: e.check,
+            roleName: guildRole.name,
+            role: guildRole,
+            user: member.user
+          }
+        }));
+
         await interaction.update({
-          content: t("tempRole.manage.removedSuccess", { locale: language, replacements: { roleName: guildRole.name, user: member.user } }),
-          embeds: [],
+          embeds: [embedError], //irónico
           components: []
         });
+
       } else {
-        return interaction.reply({ content: "O membro não possui esse cargo.", ephemeral: true });
+
+        embedError.setDescription(t("tempRole.memberDoNotHaveTheRole", {
+          locale: language,
+          replacements: {
+            user: member,
+            denyEmoji: e.deny
+          }
+        }));
+  
+        return interaction.reply({ embeds: [embedError], ephemeral: true });
       }
     } catch (error) {
-      console.error("Erro ao remover o cargo:", error);
-      await interaction.reply({
-        content: t("tempRole.manage.removeFail", { locale: language }),
-        ephemeral: true
-      });
+
+      embedError.setDescription(t("tempRole.manage.remove.fail", {
+        locale: language,
+        replacements: {
+          user: member,
+          denyEmoji: e.deny
+        }
+      }));
+
+      return interaction.reply({ embeds: [embedError], components: [], ephemeral: true });
     }
   }
 });

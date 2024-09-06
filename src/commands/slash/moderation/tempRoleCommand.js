@@ -5,11 +5,7 @@ const {
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,
-  StringSelectMenuBuilder,
-  ModalBuilder,
-  TextInputBuilder,
-  TextInputStyle,
-  ComponentType
+  StringSelectMenuBuilder
 } = require("discord.js");
 const ms = require("ms");
 const TempRole = require("../../../models/TempRoleSettings.js");
@@ -17,10 +13,12 @@ const { t, e, eId, db, color } = require("../../../utils");
 
 module.exports = {
     name: "temprole",
-    name_localizations: {
-        "pt-BR": "cargo-temporario"
-    },
     description: "Adds a temporary role to a user",
+    descriptionLocalizations: [
+      {
+        "pt-BR": "Adiciona um cargo temporário"
+      }
+    ],
     options: [
         {
             name: "add",
@@ -35,6 +33,11 @@ module.exports = {
                 },
                 {
                   name: "role",
+                  nameLocalizations: [
+                    {
+                      "pt-BR": "cargo"
+                    }
+                  ],
                   description: "Role to add",
                   type: ApplicationCommandOptionType.Role,
                   required: true
@@ -347,7 +350,7 @@ module.exports = {
 
                   return {
                     label: roleName,
-                    emoji: "",
+                    emoji: e.gear,
                     value: role.id
                   }
                 })

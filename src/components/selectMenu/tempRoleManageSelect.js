@@ -13,12 +13,22 @@ const tempRoleManageSelect = new Component({
     const userdb = await db.users.get(user);
     const language = userdb.language;
 
+    const embedError = new EmbedBuilder({
+      color: color.danger
+    });
+
     if (!selectedRole) {
-      return interaction.reply({ content: "O cargo temporário selecionado não foi encontrado.", ephemeral: true });
+      embedError.setDescription(t("tempRole.invalidRole", {
+        locale: language,
+        replacements: {
+          denyEmoji: e.deny
+        }
+      }));
+
+      return interaction.reply({ embeds: [embedError], ephemeral: true });
     }
 
     const guildRole = guild.roles.cache.get(selectedRole.roleID);
-    const roleName = guildRole ? guildRole.name : "Cargo não encontrado";
 
     const embed = {
       color: color.default,
@@ -26,9 +36,12 @@ const tempRoleManageSelect = new Component({
       description: t("tempRole.manage.details.description", {
         locale: language,
         replacements: {
-          roleName,
+          brushEmoji: e.brush,
+          role: guildRole,
+          gearEmoji: e.gear,
           staffID: selectedRole.staffID,
-          expiresAt: `<t:${Math.floor(selectedRole.expiresAt.getTime() / 1000)}:F>`
+          timeEmoji: e.time,
+          expiresAt: Math.floor(selectedRole.expiresAt.getTime() / 1000)
         }
       })
     };
@@ -43,7 +56,7 @@ const tempRoleManageSelect = new Component({
     const editButton = {
       type: ComponentType.Button,
       customId: `tempRole_manage_edit_${selectedRole.id}`,
-      label: t("tempRole.manage.edit.label", { locale: language }),
+      label: t("tempRole.manage.edit.buttonLabel", { locale: language }),
       style: ButtonStyle.Primary
     };
 
