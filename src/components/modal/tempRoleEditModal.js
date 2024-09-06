@@ -13,10 +13,11 @@ const tempRoleEditModal = new Component({
     const timeInput = interaction.fields.getTextInputValue("timeInput");
     const selectedRole = await TempRole.findById(selectedRoleId);
     const userdb = await db.users.get(user);
+    const language = userdb.language;
 
     if (!selectedRole) {
       return interaction.reply({
-        content: t("tempRole.manage.roleNotFound", { locale: interaction.locale }),
+        content: t("tempRole.manage.roleNotFound", { locale: language }),
         ephemeral: true
       });
     }
@@ -25,7 +26,7 @@ const tempRoleEditModal = new Component({
     
     if (!milliseconds || milliseconds <= 0) {
       return interaction.reply({
-        content: t("tempRole.invalidTime", { locale: interaction.locale, replacements: { denyEmoji: e.deny } }),
+        content: t("tempRole.invalidTime", { locale: language, replacements: { denyEmoji: e.deny } }),
         ephemeral: true
       });
     }
@@ -36,7 +37,7 @@ const tempRoleEditModal = new Component({
 
     if (milliseconds > maxDuration) {
       return interaction.reply({
-        content: t("tempRole.durationExceedsLimit", { locale: interaction.locale, replacements: { denyEmoji: e.deny } }),
+        content: t("tempRole.durationExceedsLimit", { locale: language, replacements: { denyEmoji: e.deny } }),
         ephemeral: true
       });
     }
@@ -51,7 +52,7 @@ const tempRoleEditModal = new Component({
 
     await interaction.update({
       content: t("tempRole.manage.edit.success", {
-        locale: interaction.locale,
+        locale: language,
         replacements: {
           roleName,
           expiresAt: `<t:${Math.floor(newExpiresAt.getTime() / 1000)}:F>`,

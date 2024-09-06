@@ -34,17 +34,17 @@ module.exports = {
                     required: true
                 },
                 {
+                  name: "role",
+                  description: "Role to add",
+                  type: ApplicationCommandOptionType.Role,
+                  required: true
+                },
+                {
                     name: "duration",
                     description: "Duration of the role (e.g., 5m, 3h, 1d, 1y)",
                     type: ApplicationCommandOptionType.String,
                     required: true
                 },
-                {
-                    name: "role",
-                    description: "Role to add",
-                    type: ApplicationCommandOptionType.Role,
-                    required: true
-                }
             ]
         },
         {

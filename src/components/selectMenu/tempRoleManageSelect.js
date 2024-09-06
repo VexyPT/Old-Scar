@@ -1,5 +1,5 @@
-const { ComponentType } = require("discord.js");
-const { t } = require("../../utils");
+const { ComponentType, ButtonStyle } = require("discord.js");
+const { t, color, db } = require("../../utils");
 const Component = require("../../utils/component.js");
 const TempRole = require("../../models/TempRoleSettings.js");
 
@@ -9,7 +9,9 @@ const tempRoleManageSelect = new Component({
   async run(interaction) {
     const selectedRoleId = interaction.values[0];
     const selectedRole = await TempRole.findById(selectedRoleId);
-    const { guild } = interaction;
+    const { guild, user } = interaction;
+    const userdb = await db.users.get(user);
+    const language = userdb.language;
 
     if (!selectedRole) {
       return interaction.reply({ content: "O cargo temporário selecionado não foi encontrado.", ephemeral: true });
@@ -19,10 +21,10 @@ const tempRoleManageSelect = new Component({
     const roleName = guildRole ? guildRole.name : "Cargo não encontrado";
 
     const embed = {
-      color: "DEFAULT",
-      title: t("tempRole.manage.details.title", { locale: interaction.locale }),
+      color: color.default,
+      title: t("tempRole.manage.details.title", { locale: language }),
       description: t("tempRole.manage.details.description", {
-        locale: interaction.locale,
+        locale: language,
         replacements: {
           roleName,
           staffID: selectedRole.staffID,
@@ -35,15 +37,15 @@ const tempRoleManageSelect = new Component({
     const removeButton = {
       type: ComponentType.Button,
       customId: `tempRole_manage_remove_${selectedRole.id}`,
-      label: t("tempRole.manage.remove.label", { locale: interaction.locale }),
-      style: "DANGER"
+      label: t("tempRole.manage.remove.label", { locale: language }),
+      style: ButtonStyle.Danger
     };
 
     const editButton = {
       type: ComponentType.Button,
       customId: `tempRole_manage_edit_${selectedRole.id}`,
-      label: t("tempRole.manage.edit.label", { locale: interaction.locale }),
-      style: "PRIMARY"
+      label: t("tempRole.manage.edit.label", { locale: language }),
+      style: ButtonStyle.Primary
     };
 
     // Envia o embed com os botões

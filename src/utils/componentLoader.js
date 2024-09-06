@@ -21,7 +21,15 @@ loadComponents(path.join(__dirname, "../components"));
 
 function handleInteraction(interaction) {
     for (const component of components) {
-        if (interaction.customId === component.customId && interaction.componentType === component.componentType) {
+        // Verifica se customId é uma regex ou string
+        const isRegex = component.customId instanceof RegExp;
+        
+        if (isRegex) {
+            if (component.customId.test(interaction.customId) && interaction.componentType === component.componentType) {
+                component.handleInteraction(interaction);
+                break;
+            }
+        } else if (interaction.customId === component.customId && interaction.componentType === component.componentType) {
             component.handleInteraction(interaction);
             break;
         }
