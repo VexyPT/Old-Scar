@@ -107,9 +107,11 @@ module.exports = {
                   return interaction.reply({ embeds: [embedError], ephemeral: true });
                 }
 
-                const milliseconds = ms(time) || (time == "1y" ? parseInt(time) * 365 * 24 * 60 * 60 * 1000 : null);
-                if (!milliseconds || milliseconds <= 0) {
-                  embedError.setDescription(t("tempRole.invalidTime", {
+                const milliseconds = ms(time) || (time === "1y" ? parseInt(time) * 365 * 24 * 60 * 60 * 1000 : null);
+
+                // Verifica se o tempo é menor que 5 minutos
+                if (!milliseconds || milliseconds < 300000) {
+                  embedError.setDescription(t("tempRole.minimumTimeRequirement", {
                     locale: language,
                     replacements: {
                       denyEmoji: e.deny
@@ -121,6 +123,7 @@ module.exports = {
                 const premiumGuild = guildDB.premium;
                 const maxDuration = premiumGuild ? 366 * 24 * 60 * 60 * 1000 : 31 * 24 * 60 * 60 * 1000;
 
+                // Verifica se o tempo excede o limite máximo
                 if (milliseconds > maxDuration) {
                   embedError.setDescription(t("tempRole.durationExceedsLimit", {
                     locale: language,

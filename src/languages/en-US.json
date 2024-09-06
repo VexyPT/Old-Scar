@@ -51,6 +51,7 @@
   "tempRole": {
     "noRolesForUser": "{{denyEmoji}} {{user}} has no temporary roles configured.",
     "invalidTime": "{{denyEmoji}} Please use a valid time limit. Ex: 3m, 2h, 1d",
+    "minimumTimeRequirement": "{{denyEmoji}} The minimum duration you can set is 5 minutes. Please choose a longer duration",
     "durationExceedsLimit": "{{denyEmoji}} The duration you specified exceeds the allowed limit. For non-premium servers, the maximum duration is 31 days. For premium users, the maximum duration is 366 days. Please choose a shorter duration.",
     "notEditable": "{{denyEmoji}} I can't assign this role because it's either unmanageable or above my role.",
     "alreadyHaveTheRole": "{{denyEmoji}} {{user}} already has this role.",

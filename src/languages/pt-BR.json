@@ -51,6 +51,7 @@
   "tempRole": {
     "noRolesForUser": "{{denyEmoji}} {{user}} não tem nenhum cargo temporário configurado.",
     "invalidTime": "{{denyEmoji}} Por favor, usa um limite válido de tempo. Ex: 3m, 2h, 1d",
+    "minimumTimeRequirement": "{{denyEmoji}} A duração mínima que você pode definir é de 5 minutos. Por favor, escolha uma duração mais longa.",
     "durationExceedsLimit": "{{denyEmoji}} A duração que você especificou excede o limite permitido. Para servidores não premium, a duração máxima é de 31 dias. Para usuários premium, a duração máxima é de 366 dias. Por favor, escolha uma duração mais curta.",
     "notEditable": "{{denyEmoji}} Não posso atribuir este cargo porque ele não é gerenciável, ou está acima do meu cargo.",
     "alreadyHaveTheRole": "{{denyEmoji}} {{user}} já possui este cargo.",

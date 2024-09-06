@@ -13,7 +13,7 @@ const tempRoleEditModal = new Component({
     const timeInput = interaction.fields.getTextInputValue("timeInput");
     const selectedRole = await TempRole.findById(selectedRoleId);
     const userdb = await db.users.get(user);
-    const guildDB = await db.users.get(guild);
+    const guildDB = await db.guilds.get(guild);
     const language = userdb.language;
 
     const embedError = new EmbedBuilder({
@@ -21,9 +21,7 @@ const tempRoleEditModal = new Component({
     });
 
     if (!selectedRole) {
-
-      embedError.setDescription(t("tempRole.manage.roleNotFound", { locale: language, replacements: { denyEmoji: e.deny } }))
-
+      embedError.setDescription(t("tempRole.manage.roleNotFound", { locale: language, replacements: { denyEmoji: e.deny } }));
       return interaction.reply({
         embeds: [embedError],
         ephemeral: true
@@ -31,11 +29,20 @@ const tempRoleEditModal = new Component({
     }
 
     const milliseconds = ms(timeInput) || (timeInput === "1y" ? 365 * 24 * 60 * 60 * 1000 : null);
-    
+
+    // Verifica se a duração é válida
     if (!milliseconds || milliseconds <= 0) {
+      embedError.setDescription(t("tempRole.invalidTime", { locale: language, replacements: { denyEmoji: e.deny } }));
+      return interaction.reply({
+        embeds: [embedError],
+        ephemeral: true
+      });
+    }
 
-      embedError.setDescription(t("tempRole.invalidTime", { locale: language, replacements: { denyEmoji: e.deny } }))
-
+    // Verifica se a duração é menor que 5 minutos
+    const minimumDuration = 5 * 60 * 1000; // 5 minutos em milissegundos
+    if (milliseconds < minimumDuration) {
+      embedError.setDescription(t("tempRole.minimumTimeRequirement", { locale: language, replacements: { denyEmoji: e.deny } }));
       return interaction.reply({
         embeds: [embedError],
         ephemeral: true
@@ -45,10 +52,9 @@ const tempRoleEditModal = new Component({
     const premiumGuild = guildDB.premium;
     const maxDuration = premiumGuild ? 366 * 24 * 60 * 60 * 1000 : 31 * 24 * 60 * 60 * 1000;
 
+    // Verifica se a duração excede o limite máximo
     if (milliseconds > maxDuration) {
-
-      embedError.setDescription(t("tempRole.durationExceedsLimit", { locale: language, replacements: { denyEmoji: e.deny } }))
-
+      embedError.setDescription(t("tempRole.durationExceedsLimit", { locale: language, replacements: { denyEmoji: e.deny } }));
       return interaction.reply({
         embeds: [embedError],
         ephemeral: true
