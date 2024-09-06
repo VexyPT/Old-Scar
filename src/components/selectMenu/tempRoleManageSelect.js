@@ -1,5 +1,5 @@
-const { ComponentType, ButtonStyle } = require("discord.js");
-const { t, color, db } = require("../../utils");
+const { ComponentType, ButtonStyle, EmbedBuilder } = require("discord.js");
+const { t, color, db, e, eId } = require("../../utils");
 const Component = require("../../utils/component.js");
 const TempRole = require("../../models/TempRoleSettings.js");
 
@@ -50,6 +50,7 @@ const tempRoleManageSelect = new Component({
       type: ComponentType.Button,
       customId: `tempRole_manage_remove_${selectedRole.id}`,
       label: t("tempRole.manage.remove.label", { locale: language }),
+      emoji: eId.undo,
       style: ButtonStyle.Danger
     };
 
@@ -57,6 +58,7 @@ const tempRoleManageSelect = new Component({
       type: ComponentType.Button,
       customId: `tempRole_manage_edit_${selectedRole.id}`,
       label: t("tempRole.manage.edit.buttonLabel", { locale: language }),
+      emoji: eId.time,
       style: ButtonStyle.Primary
     };
 

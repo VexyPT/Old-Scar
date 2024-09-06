@@ -100,8 +100,8 @@
         "description": "{{checkEmoji}} Cargo **`{{roleName}}`** ({{role}}) removido com sucesso de {{user}}"
       },
       "details": {
-        "title": "Detalhes sobre: {{RoleName}}",
-        "description": "{{brushEmoji}} **Cargo:** {{role}}\n{{gearEmoji}} **Adicionado por:** <@{{staffID}}> | `{{staffID}}`\n{{timeEmoji}} Expira <t:{{expiresAt}}:F>"
+        "title": "Gerenciamento de Cargo",
+        "description": "{{brushEmoji}} **Cargo:** {{role}}\n{{gearEmoji}} **Adicionado por:** <@{{staffID}}> | `{{staffID}}`\n{{timeEmoji}} **Expira** <t:{{expiresAt}}:F>"
       }
     }
   }
