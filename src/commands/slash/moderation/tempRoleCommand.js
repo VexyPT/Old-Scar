@@ -155,7 +155,6 @@ module.exports = {
                   return interaction.reply({ embeds: [embedError], ephemeral: true });
                 }
 
-                // Verificação se o cargo temporário já está no banco de dados
                 const existingTempRole = await TempRole.findOne({ guildID: guild.id, userID: user.id, roleID: role.id });
                 
                 if (existingTempRole) {

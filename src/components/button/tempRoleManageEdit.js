@@ -1,5 +1,5 @@
 const { ComponentType, ModalBuilder, TextInputBuilder, TextInputStyle, EmbedBuilder, ActionRowBuilder } = require("discord.js");
-const { t, db, color } = require("../../utils");
+const { t, db, color, e } = require("../../utils");
 const TempRole = require("../../models/TempRoleSettings.js");
 const Component = require("../../utils/component.js");
 

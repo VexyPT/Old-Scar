@@ -61,7 +61,9 @@
     "noMemberFounded": "{{denyEmoji}} Membro não encontrado",
     "maxTempRolesReachedRegular": "{{denyEmoji}} Execedes-te o numero limite de cargos temporários para o mesmo usuário (`3`)\n> {{hintEmoji}} Servidores Premium podem colocar até `15` cargos temporários por membro.",
     "maxTempRolesReachedPremium": "{{denyEmoji}} Execedes-te o numero limite de cargos temporários para o mesmo usuário (`15`)",
-    "alreadyTempRoleAssigned": "{{denyEmoji}} Este cargo temporário já está atribuido ao usuário no meu banco de dados, usa </temprole add:1279875172777721989> para remove-lo.",
+    "alreadyTempRoleAssigned": "{{denyEmoji}} Este cargo temporário já está atribuido ao usuário na minha base de dados, usa </temprole manage:1279875172777721989> se quiseres remove-lo.",
+    "removingFromDatabase": "A apagar o cargo temporário da minha base de dados... {{loadingEmoji}}",
+    "removedFromDatabase": "{{checkEmoji}} Cargo temporário apagado da minha base de dados com sucesso!",
     "success": {
       "title": "Cargo Temporário adicionado",
       "description": "{{roleEmoji}} **Cargo:** {{role}}\n{{memberEmoji}} **Membro:** {{user}}\n{{timeEmoji}} **Expira** <t:{{expiresAt}}:R>"

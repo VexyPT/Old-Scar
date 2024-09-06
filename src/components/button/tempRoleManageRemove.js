@@ -74,19 +74,47 @@ const tempRoleManageRemove = new Component({
         });
 
       } else {
+        
+        const embedFirst = new EmbedBuilder({
+          color: color.warning,
+          description: t("tempRole.memberDoNotHaveTheRole", {
+            locale: language,
+            replacements: {
+              user: member,
+              denyEmoji: e.deny
+            }
+          })
+        });
 
-        embedError.setDescription(t("tempRole.memberDoNotHaveTheRole", {
-          locale: language,
-          replacements: {
-            user: member,
-            denyEmoji: e.deny
-          }
-        }));
-  
-        return interaction.reply({ embeds: [embedError], ephemeral: true });
+        await interaction.reply({ embeds: [embedFirst], ephemeral: true });
+
+        const embedRemoving = new EmbedBuilder({
+          color: color.info,
+          description: t("tempRole.removingFromDatabase", {
+            locale: language,
+            replacements: {
+              loadingEmoji: e.loading
+            }
+          })
+        });
+
+        await interaction.editReply({ embeds: [embedRemoving] });
+
+        await TempRole.findByIdAndDelete(selectedRoleId);
+
+        const embedSuccess = new EmbedBuilder({
+          color: color.success,
+          description: t("tempRole.removedFromDatabase", {
+            locale: language,
+            replacements: {
+              checkEmoji: e.check
+            }
+          })
+        });
+
+        return interaction.editReply({ embeds: [embedSuccess] });
       }
     } catch (error) {
-
       embedError.setDescription(t("tempRole.manage.remove.fail", {
         locale: language,
         replacements: {
