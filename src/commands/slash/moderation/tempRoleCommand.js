@@ -130,6 +130,17 @@ module.exports = {
                 const role = options.getRole("role", true);
                 const time = options.getString("duration", true);
                 const reason = options.getString("reason", false) || t("tempRole.reason", { locale: language });
+
+                if (reason.length > 50) {
+                  embedError.setDescription(t("tempRole.reasonTooLong", {
+                    locale: language,
+                    replacements: {
+                      denyEmoji: e.deny
+                    }
+                  }));
+                  return interaction.reply({ embeds: [embedError], ephemeral: true });
+                }
+                
                 const botMember = await guild.members.fetch(interaction.client.user.id);
 
                 if (!member.permissions.has(PermissionFlagsBits.ManageRoles)) {
