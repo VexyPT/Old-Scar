@@ -5,7 +5,8 @@ const tempRoleSchema = new mongoose.Schema({
     roleID: { type: String, required: true },
     guildID: { type: String, required: true },
     expiresAt: { type: Date, required: true },
-    staffID: { type: String, required: true }
+    staffID: { type: String, required: true },
+    reason: { type: String, required: true }
 });
 
 module.exports = mongoose.model('TempRole', tempRoleSchema);

@@ -65,9 +65,10 @@
     "alreadyTempRoleAssigned": "{{denyEmoji}} This temporary role is already assigned to the user in my database. Use </temprole manage:1279875172777721989> if you want to remove it.",
     "removingFromDatabase": "Removing temporary role from my database... {{loadingEmoji}}",
     "removedFromDatabase": "{{checkEmoji}} Temporary role successfully removed from my database!",
+    "reason": "Not specified",
     "success": {
       "title": "Temporary Role Added",
-      "description": "{{roleEmoji}} **Role:** {{role}}\n{{memberEmoji}} **Member:** {{user}}\n{{timeEmoji}} **Expires** <t:{{expiresAt}}:R>"
+      "description": "{{roleEmoji}} **Role:** {{role}}\n{{memberEmoji}} **Member:** {{user}}\n{{postEmoji}} **Reason:** `{{reason}}`\n{{timeEmoji}} **Expires** <t:{{expiresAt}}:R>"
     },
     "noActiveRoles": "{{denyEmoji}} No active temporary roles found.",
     "list": "<@{{roleUserID}}> - <@&{{roleID}}> expires <t:{{expiresAt}}:R>",
@@ -107,7 +108,7 @@
       },
       "details": {
         "title": "Role Management",
-        "description": "{{brushEmoji}} **Role:** {{role}}\n{{gearEmoji}} **Added by:** <@{{staffID}}> | `{{staffID}}`\n{{timeEmoji}} **Expires** <t:{{expiresAt}}:F>"
+        "description": "{{brushEmoji}} **Role:** {{role}}\n{{gearEmoji}} **Added by:** <@{{staffID}}> | `{{staffID}}`\n{{postEmoji}} **Reason:** `{{reason}}`\n{{timeEmoji}} **Expires** <t:{{expiresAt}}:F>"
       }
     }
   }

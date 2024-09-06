@@ -65,9 +65,10 @@
     "alreadyTempRoleAssigned": "{{denyEmoji}} Este cargo temporário já está atribuido ao usuário na minha base de dados, usa </temprole manage:1279875172777721989> se quiseres remove-lo.",
     "removingFromDatabase": "A apagar o cargo temporário da minha base de dados... {{loadingEmoji}}",
     "removedFromDatabase": "{{checkEmoji}} Cargo temporário apagado da minha base de dados com sucesso!",
+    "reason": "Não específicado",
     "success": {
       "title": "Cargo Temporário adicionado",
-      "description": "{{roleEmoji}} **Cargo:** {{role}}\n{{memberEmoji}} **Membro:** {{user}}\n{{timeEmoji}} **Expira** <t:{{expiresAt}}:R>"
+      "description": "{{roleEmoji}} **Cargo:** {{role}}\n{{memberEmoji}} **Membro:** {{user}}\n{{postEmoji}} **Motivo:** `{{reason}}`\n{{timeEmoji}} **Expira** <t:{{expiresAt}}:R>"
     },
     "noActiveRoles": "{{denyEmoji}} Nenhum cargo temporário ativo encontrado.",
     "list": "<@{{roleUserID}}> - <@&{{roleID}}> expira <t:{{expiresAt}}:R>",
@@ -107,7 +108,7 @@
       },
       "details": {
         "title": "Gerenciamento de Cargo",
-        "description": "{{brushEmoji}} **Cargo:** {{role}}\n{{gearEmoji}} **Adicionado por:** <@{{staffID}}> | `{{staffID}}`\n{{timeEmoji}} **Expira** <t:{{expiresAt}}:F>"
+        "description": "{{brushEmoji}} **Cargo:** {{role}}\n{{gearEmoji}} **Adicionado por:** <@{{staffID}}> | `{{staffID}}`\n{{postEmoji}} **Motivo:** `{{reason}}`\n{{timeEmoji}} **Expira** <t:{{expiresAt}}:F>"
       }
     }
   }

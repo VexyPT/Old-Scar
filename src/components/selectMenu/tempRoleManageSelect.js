@@ -40,6 +40,8 @@ const tempRoleManageSelect = new Component({
           role: guildRole,
           gearEmoji: e.gear,
           staffID: selectedRole.staffID,
+          postEmoji: e.post,
+          reason: selectedRole.reason,
           timeEmoji: e.time,
           expiresAt: Math.floor(selectedRole.expiresAt.getTime() / 1000)
         }

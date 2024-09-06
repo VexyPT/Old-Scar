@@ -54,16 +54,28 @@ module.exports = {
                   required: true
                 },
                 {
-                    name: "duration",
-                    name_localizations: {
-                      "pt-BR": "tempo"
-                    },
-                    description: "Duration of the role (e.g., 5m, 3h, 1d, 1y)",
-                    description_localizations: {
-                      "pt-BR": "Em quanto tempo o cargo irá expirar (ex., 5m, 3h, 1d, 1y)"
-                    },
-                    type: ApplicationCommandOptionType.String,
-                    required: true
+                  name: "duration",
+                  name_localizations: {
+                    "pt-BR": "tempo"
+                  },
+                  description: "Duration of the role (e.g., 5m, 3h, 1d, 1y)",
+                  description_localizations: {
+                    "pt-BR": "Em quanto tempo o cargo irá expirar (ex., 5m, 3h, 1d, 1y)"
+                  },
+                  type: ApplicationCommandOptionType.String,
+                  required: true
+                },
+                {
+                  name: "reason",
+                  name_localizations: {
+                    "pt-BR": "motivo"
+                  },
+                  description: "The reason to add this temprole",
+                  description_localizations: {
+                    "pt-BR": "Motivo de adicionar este cargo temporário"
+                  },
+                  type: ApplicationCommandOptionType.String,
+                  required: false
                 },
             ]
         },
@@ -117,6 +129,7 @@ module.exports = {
                 const user = options.getUser("user", true);
                 const role = options.getRole("role", true);
                 const time = options.getString("duration", true);
+                const reason = options.getString("reason", false) || t("tempRole.reason", { locale: language });
                 const botMember = await guild.members.fetch(interaction.client.user.id);
 
                 if (!member.permissions.has(PermissionFlagsBits.ManageRoles)) {
@@ -230,7 +243,8 @@ module.exports = {
                     roleID: role.id,
                     guildID: guild.id,
                     expiresAt,
-                    staffID: member.id
+                    staffID: member.id,
+                    reason,
                 });
 
                 await tempRole.save();
@@ -246,6 +260,8 @@ module.exports = {
                       role,
                       memberEmoji: e.member,
                       user,
+                      postEmoji: e.post,
+                      reason,
                       timeEmoji: e.time,
                       expiresAt: Math.floor(expiresAt.getTime() / 1000)
                     }
