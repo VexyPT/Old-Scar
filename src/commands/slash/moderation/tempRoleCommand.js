@@ -155,6 +155,40 @@ module.exports = {
                   return interaction.reply({ embeds: [embedError], ephemeral: true });
                 }
 
+                // Verificação se o cargo temporário já está no banco de dados
+                const existingTempRole = await TempRole.findOne({ guildID: guild.id, userID: user.id, roleID: role.id });
+                
+                if (existingTempRole) {
+                  embedError.setDescription(t("tempRole.alreadyTempRoleAssigned", {
+                    locale: language,
+                    replacements: {
+                      denyEmoji: e.deny,
+                      role,
+                      user
+                    }
+                  }));
+                  return interaction.reply({ embeds: [embedError], ephemeral: true });
+                }
+
+                const userTempRolesCount = await TempRole.countDocuments({ guildID: guild.id, userID: user.id });
+                const maxTempRoles = premiumGuild ? 15 : 3;
+
+                if (userTempRolesCount >= maxTempRoles) {
+                  embedError.setDescription(premiumGuild ? t("tempRole.maxTempRolesReachedPremium", {
+                    locale: language,
+                    replacements: {
+                      denyEmoji: e.deny
+                    }
+                  }) : t("tempRole.maxTempRolesReachedRegular", {
+                    locale: language,
+                    replacements: {
+                      denyEmoji: e.deny,
+                      hintEmoji: e.hint
+                    }
+                  }));
+                  return interaction.reply({ embeds: [embedError], ephemeral: true });
+                }
+
                 await memberToAssign.roles.add(role);
 
                 const tempRole = new TempRole({

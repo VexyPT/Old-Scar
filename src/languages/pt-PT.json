@@ -59,6 +59,9 @@
     "notHaveRoleToRemove": "{{denyEmoji}} Não encontrei nenhum cargo para remover.",
     "roleNotFound": "{{denyEmoji}} Cargo não encontrado no servidor",
     "noMemberFounded": "{{denyEmoji}} Membro não encontrado",
+    "maxTempRolesReachedRegular": "{{denyEmoji}} Execedes-te o numero limite de cargos temporários para o mesmo usuário (`3`)\n> {{hintEmoji}} Servidores Premium podem colocar até `15` cargos temporários por membro.",
+    "maxTempRolesReachedPremium": "{{denyEmoji}} Execedes-te o numero limite de cargos temporários para o mesmo usuário (`15`)",
+    "alreadyTempRoleAssigned": "{{denyEmoji}} Este cargo temporário já está atribuido ao usuário no meu banco de dados, usa </temprole add:1279875172777721989> para remove-lo.",
     "success": {
       "title": "Cargo Temporário adicionado",
       "description": "{{roleEmoji}} **Cargo:** {{role}}\n{{memberEmoji}} **Membro:** {{user}}\n{{timeEmoji}} **Expira** <t:{{expiresAt}}:R>"

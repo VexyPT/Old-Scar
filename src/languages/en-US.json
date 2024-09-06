@@ -59,6 +59,9 @@
     "notHaveRoleToRemove": "{{denyEmoji}} No role found to remove.",
     "roleNotFound": "{{denyEmoji}} Role not found on the server",
     "noMemberFounded": "{{denyEmoji}} Member not found",
+    "maxTempRolesReachedRegular": "{{denyEmoji}} You have exceeded the limit of temporary roles for the same user (`3`)\n> {{hintEmoji}} Premium servers can assign up to `15` temporary roles per member.",
+    "maxTempRolesReachedPremium": "{{denyEmoji}} You have exceeded the limit of temporary roles for the same user (`15`)",
+    "alreadyTempRoleAssigned": "{{denyEmoji}} This temporary role is already assigned to the user in my database. Use </temprole add:1279875172777721989> to remove it.",
     "success": {
       "title": "Temporary Role Added",
       "description": "{{roleEmoji}} **Role:** {{role}}\n{{memberEmoji}} **Member:** {{user}}\n{{timeEmoji}} **Expires** <t:{{expiresAt}}:R>"
