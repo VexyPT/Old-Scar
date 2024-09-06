@@ -13,38 +13,52 @@ const { t, e, eId, db, color } = require("../../../utils");
 
 module.exports = {
     name: "temprole",
+    name_localizations: {
+      "pt-BR": "cargo-temporário"
+    },
     description: "Adds a temporary role to a user",
-    descriptionLocalizations: [
-      {
-        "pt-BR": "Adiciona um cargo temporário"
-      }
-    ],
+    description_localizations: {
+        "pt-BR": "Adiciona um cargo temporário a um usuário"
+    },
     options: [
         {
             name: "add",
+            name_localizations: {
+              "pt-BR": "adicionar"
+            },
             description: "Add a temporary role",
             type: ApplicationCommandOptionType.Subcommand,
             options: [
                 {
                     name: "user",
                     description: "User to assign the role",
+                    description_localizations: {
+                      "pt-BR": "Usuário para setar o cargo temporário"
+                    },
                     type: ApplicationCommandOptionType.User,
                     required: true
                 },
                 {
                   name: "role",
-                  nameLocalizations: [
-                    {
-                      "pt-BR": "cargo"
-                    }
-                  ],
+                  name_localizations: {
+                    "pt-BR": "cargo"
+                  },
                   description: "Role to add",
+                  description_localizations: {
+                    "pt-BR": "Cargo para adicionar"
+                  },
                   type: ApplicationCommandOptionType.Role,
                   required: true
                 },
                 {
                     name: "duration",
+                    name_localizations: {
+                      "pt-BR": "tempo"
+                    },
                     description: "Duration of the role (e.g., 5m, 3h, 1d, 1y)",
+                    description_localizations: {
+                      "pt-BR": "Em quanto tempo o cargo irá expirar (ex., 5m, 3h, 1d, 1y)"
+                    },
                     type: ApplicationCommandOptionType.String,
                     required: true
                 },
@@ -52,17 +66,32 @@ module.exports = {
         },
         {
           name: "list",
+          name_localizations: {
+            "pt-BR": "listar"
+          },
           description: "Show the active temporary roles",
+          description_localizations: {
+            "pt-BR": "Lista todos os cargos temporários do servidor"
+          },
           type: ApplicationCommandOptionType.Subcommand
         },
         {
           name: "manage",
+          name_localizations: {
+            "pt-BR": "gerenciar"
+          },
           description: "Manage a temprole",
+          description_localizations: {
+            "pt-BR": "Gerencia um cargo temporário de um membro"
+          },
           type: ApplicationCommandOptionType.Subcommand,
           options: [
             {
               name: "user",
               description: "select a user to manage the temprole",
+              description_localizations: {
+                "pt-BR": "Selecione um usuário para gerenciar"
+              },
               type: ApplicationCommandOptionType.User,
               required: true
             }

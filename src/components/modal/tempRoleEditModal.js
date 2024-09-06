@@ -78,7 +78,7 @@ const tempRoleEditModal = new Component({
       }
     }));
 
-    await interaction.update({
+    await interaction.followUp({
       embeds: [embedError], // irónico
       components: [],
       ephemeral: true
