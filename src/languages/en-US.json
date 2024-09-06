@@ -94,9 +94,9 @@
       },
       "editSuccess": {
         "title": "Duration Updated",
-        "description": "{{checkEmoji}} {{role}} now expires at <t:{{newExpiresAt}}:R>"
+        "description": "{{checkEmoji}} {{role}} now expires <t:{{newExpiresAt}}:R>"
       },
-      "removedSucess": {
+      "removedSuccess": {
         "description": "{{checkEmoji}} Role **`{{roleName}}`** ({{role}}) successfully removed from {{user}}"
       },
       "details": {
