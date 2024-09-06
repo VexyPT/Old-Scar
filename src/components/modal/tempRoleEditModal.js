@@ -1,4 +1,4 @@
-const { ComponentType } = require("discord.js");
+const { ComponentType, EmbedBuilder } = require("discord.js");
 const { t, db, e, color } = require("../../utils");
 const TempRole = require("../../models/TempRoleSettings.js");
 const Component = require("../../utils/component.js");
@@ -71,7 +71,6 @@ const tempRoleEditModal = new Component({
         newExpiresAt: Math.floor(newExpiresAt.getTime() / 1000)
       }
     }));
-    embedError.setTitle(t("tempRole.manage.editSuccess.description", { locale: language}));
 
     await interaction.update({
       embeds: [embedError], // irónico

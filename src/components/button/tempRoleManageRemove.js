@@ -58,7 +58,7 @@ const tempRoleManageRemove = new Component({
         await member.roles.remove(guildRole);
         await TempRole.findByIdAndDelete(selectedRoleId);
         embedError.setColor(color.success);
-        embedError.setDescription(t("tempRole.manage.removedSuccess", {
+        embedError.setDescription(t("tempRole.manage.removedSuccess.description", {
           locale: language,
           replacements: {
             checkEmoji: e.check,
