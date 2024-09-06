@@ -33,7 +33,6 @@ const tempRoleManageSelect = new Component({
       })
     };
 
-    // Define botões de "Remover" e "Editar"
     const removeButton = {
       type: ComponentType.Button,
       customId: `tempRole_manage_remove_${selectedRole.id}`,
@@ -48,7 +47,6 @@ const tempRoleManageSelect = new Component({
       style: ButtonStyle.Primary
     };
 
-    // Envia o embed com os botões
     await interaction.update({
       embeds: [embed],
       components: [{ type: ComponentType.ActionRow, components: [removeButton, editButton] }],

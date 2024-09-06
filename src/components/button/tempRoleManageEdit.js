@@ -14,7 +14,6 @@ const tempRoleManageEdit = new Component({
       return interaction.reply({ content: "Cargo temporário não encontrado.", ephemeral: true });
     }
 
-    // Criação do modal para alterar a data de expiração
     const modal = new ModalBuilder()
       .setCustomId(`tempRole_edit_modal_${selectedRole.id}`)
       .setTitle(t("tempRole.manage.edit.modal.title", { locale: interaction.locale }));
