@@ -343,10 +343,11 @@ module.exports = {
                 placeholder: t("tempRole.manage.select.placeholder", { locale: language }),
                 options: tempRoles.map(role => {
                   const guildRole = guild.roles.cache.get(role.roleID);
-                  const roleName = guildRole ? guildRole.name : "Cargo não encontrado";
+                  const roleName = guildRole ? guildRole.name : t("tempRole.manage.select.noRole", { locale: language });
 
                   return {
                     label: roleName,
+                    emoji: "",
                     value: role.id
                   }
                 })
