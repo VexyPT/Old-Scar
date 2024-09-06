@@ -49,51 +49,60 @@
     "earlySupporter": "Early Nitro Supporter"
   },
   "tempRole": {
-    "noRolesForUser": "{{denyEmoji}} {{user}} does not have any temporary roles configured.",
-    "invalidTime": "{{denyEmoji}} Please use a valid time limit. Ex: 3m, 2h, 1d",
-    "durationExceedsLimit": "{{denyEmoji}} The duration you specified exceeds the allowed limit. For non-premium users, the maximum duration is 31 days. For premium users, the maximum duration is 366 days. Please choose a shorter duration.",
-    "notEditable": "{{denyEmoji}} I cannot assign this role because it is either unmanageable or above my role.",
-    "alreadyHaveTheRole": "{{denyEmoji}} {{user}} already has this role.",
+    "noRolesForUser": "{{denyEmoji}} {{user}} não tem nenhum cargo temporário configurado.",
+    "invalidTime": "{{denyEmoji}} Por favor, usa um limite válido de tempo. Ex: 3m, 2h, 1d",
+    "durationExceedsLimit": "{{denyEmoji}} A duração que você especificou excede o limite permitido. Para servidores não premium, a duração máxima é de 31 dias. Para usuários premium, a duração máxima é de 366 dias. Por favor, escolha uma duração mais curta.",
+    "notEditable": "{{denyEmoji}} Não posso atribuir este cargo porque ele não é gerenciável, ou está acima do meu cargo.",
+    "alreadyHaveTheRole": "{{denyEmoji}} {{user}} já possui este cargo.",
+    "memberDoNotHaveTheRole": "{{denyEmoji}} {{user}} não possui este cargo.",
+    "invalidRole": "{{denyEmoji}} Cargo inválido",
+    "notHaveRoleToRemove": "{{denyEmoji}} Não encontrei nenhum cargo para remover.",
+    "roleNotFound": "{{denyEmoji}} Cargo não encontrado no servidor",
+    "noMemberFounded": "{{denyEmoji}} Membro não encontrado",
     "success": {
-      "title": "Temporary Role Added",
-      "description": "{{roleEmoji}} **Role:** {{role}}\n{{memberEmoji}} **Member:** {{user}}\n{{timeEmoji}} **Expires** <t:{{expiresAt}}:R>"
+      "title": "Cargo Temporário adicionado",
+      "description": "{{roleEmoji}} **Cargo:** {{role}}\n{{memberEmoji}} **Membro:** {{user}}\n{{timeEmoji}} **Expira** <t:{{expiresAt}}:R>"
     },
-    "noActiveRoles": "{{denyEmoji}} No active temporary roles found.",
-    "list": "<@{{roleUserID}}> - <@&{{roleID}}> expires <t:{{expiresAt}}:R>",
+    "noActiveRoles": "{{denyEmoji}} Nenhum cargo temporário ativo encontrado.",
+    "list": "<@{{roleUserID}}> - <@&{{roleID}}> expira <t:{{expiresAt}}:R>",
     "listed": {
-      "title": "Active Temporary Roles",
-      "descriptionNotRole": "No active temporary roles on this page.",
-      "footer": "Page {{currentPage}} of {{totalPages}}"
+      "title": "Cargos Temporários Ativos",
+      "descriptionNotRole": "Nenhum cargo temporário ativo nesta página.",
+      "footer": "Página {{currentPage}} de {{totalPages}}"
     },
     "manage": {
-      "title": "Manage Temporary Roles",
-      "description": "Select a temporary role to manage for {{user}}.",
+      "title": "Gerenciar Cargos Temporários",
+      "description": "Selecione um cargo temporário de {{user}} para gerenciar",
       "select": {
-        "placeholder": "Select a temporary role",
-        "label": "{{roleID}} - Expires <t:{{expiresAt}}:R>"
+        "placeholder": "Selecione um cargo temporário",
+        "noRole": "Cargo não encontrado"
       },
-      "Selected": {
-        "title": "Manage Temporary Role",
-        "description": "**Role:** <@&{{roleID}}>\n**Expires:** <t:{{expiresAt}}:R>"
+      "selected": {
+        "title": "Gerenciar Cargo Temporário",
+        "description": "**Cargo:** <@&{{roleID}}>\n**Expira em:** <t:{{expiresAt}}:R>"
       },
-      "Remove": {
-        "label": "Remove Role"
+      "remove": {
+        "label": "Remover Cargo",
+        "fail": "{{denyEmoji}} Erro ao remover o cargo"
       },
-      "Edit": {
-        "modalTitle": "Edit Temporary Role Duration",
-        "modalTimeLabel": "New Expiration Time (ex: 5m, 3h, 1d, 1y)",
-        "label": "Edit Time",
-        "successDescription": "{{role}} for {{user}} now expires at {{newExpiresAt}}"
+      "edit": {
+        "modalTitle": "Editar Duração do Cargo Temporário",
+        "modalPlaceHolder": "Novo Tempo de Expiração (ex: 5m, 3h, 1d, 1y)",
+        "modalLabel": "Editar Tempo",
+        "successDescription": "Cargo {{role}} de configurado para {{user}} agora expira {{newExpiresAt}}",
+        "buttonLabel": "Editar data de expiração"
       },
-      "EditSuccess": {
-        "title": "Duration Updated",
-        "description": "{{role}} now expires at <t:{{newExpiresAt}}:R>"
+      "editSuccess": {
+        "title": "Duração Atualizada",
+        "description": "{{checkEmoji}} {{role}} agora expira em <t:{{newExpiresAt}}:R>"
       },
       "removedSucess": {
-        "description": "{{checkEmoji}} Successfully removed {{roleToRemove}} from {{user}}"
+        "description": "{{checkEmoji}} Cargo **`{{roleName}}`** ({{role}}) removido com sucesso de {{user}}"
       },
-      "invaliedRole": "Invalid role",
-      "notHaveRoleToRemove": "{{denyEmoji}} No role found to remove."
+      "details": {
+        "title": "Detalhes sobre: {{RoleName}}",
+        "description": "{{brushEmoji}} **Cargo:** {{role}}\n{{gearEmoji}} **Adicionado por:** <@{{staffID}}> | `{{staffID}}`\n{{timeEmoji}} Expira <t:{{expiresAt}}:F>"
+      }
     }
   }
 }

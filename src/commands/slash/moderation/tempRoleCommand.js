@@ -73,6 +73,7 @@ module.exports = {
     async execute(interaction) {
         const { options, member, guild } = interaction;
         const userdb = await db.users.get(interaction.user);
+        const guildDB = await db.guilds.get(guild);
         const language = userdb.language;
 
         const embedError = new EmbedBuilder({
@@ -117,8 +118,8 @@ module.exports = {
                   return interaction.reply({ embeds: [embedError], ephemeral: true });
                 }
 
-                const premiumUser = userdb.premium;
-                const maxDuration = premiumUser ? 366 * 24 * 60 * 60 * 1000 : 31 * 24 * 60 * 60 * 1000;
+                const premiumGuild = guildDB.premium;
+                const maxDuration = premiumGuild ? 366 * 24 * 60 * 60 * 1000 : 31 * 24 * 60 * 60 * 1000;
 
                 if (milliseconds > maxDuration) {
                   embedError.setDescription(t("tempRole.durationExceedsLimit", {

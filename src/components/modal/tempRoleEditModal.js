@@ -13,6 +13,7 @@ const tempRoleEditModal = new Component({
     const timeInput = interaction.fields.getTextInputValue("timeInput");
     const selectedRole = await TempRole.findById(selectedRoleId);
     const userdb = await db.users.get(user);
+    const guildDB = await db.users.get(guild);
     const language = userdb.language;
 
     const embedError = new EmbedBuilder({
@@ -41,9 +42,8 @@ const tempRoleEditModal = new Component({
       });
     }
 
-    // Verificar se o usuário é premium para definir o tempo máximo permitido
-    const premiumUser = userdb.premium;
-    const maxDuration = premiumUser ? 366 * 24 * 60 * 60 * 1000 : 31 * 24 * 60 * 60 * 1000;
+    const premiumGuild = guildDB.premium;
+    const maxDuration = premiumGuild ? 366 * 24 * 60 * 60 * 1000 : 31 * 24 * 60 * 60 * 1000;
 
     if (milliseconds > maxDuration) {
 
