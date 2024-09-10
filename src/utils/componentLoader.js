@@ -21,7 +21,6 @@ loadComponents(path.join(__dirname, "../components"));
 
 function handleInteraction(interaction) {
     for (const component of components) {
-        // Verifica se customId é uma regex ou string
         const isRegex = component.customId instanceof RegExp;
         
         if (isRegex) {

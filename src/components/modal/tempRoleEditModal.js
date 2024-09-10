@@ -74,6 +74,7 @@ const tempRoleEditModal = new Component({
           role: guildRole,
           gearEmoji: e.gear,
           staffID: selectedRole.staffID,
+          postEmoji: e.post,
           timeEmoji: e.time,
           expiresAt: Math.floor(newExpiresAt.getTime() / 1000) // Correção aqui
         }
