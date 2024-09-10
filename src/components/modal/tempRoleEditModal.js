@@ -75,8 +75,9 @@ const tempRoleEditModal = new Component({
           gearEmoji: e.gear,
           staffID: selectedRole.staffID,
           postEmoji: e.post,
+          reason: selectedRole.reason,
           timeEmoji: e.time,
-          expiresAt: Math.floor(newExpiresAt.getTime() / 1000) // Correção aqui
+          expiresAt: Math.floor(newExpiresAt.getTime() / 1000)
         }
       })
     });
