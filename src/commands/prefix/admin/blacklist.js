@@ -26,7 +26,7 @@ module.exports = {
     const userData = await db.users.get(target);
     switch (subcommand) {
       case "add": {
-        let reason = args.slice(2).join(" "); // Mudei const para let para poder redefinir abaixo
+        let reason = args.slice(2).join(" ");
         if (!reason) reason = "Não informado";
 
         if (userData && userData.blacklist.isBanned) {
