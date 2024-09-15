@@ -1,4 +1,4 @@
-const { t, e, db } = require("../utils");
+const { t, e, db } = require("../../utils");
 
 module.exports = {
     name: "messageCreate",

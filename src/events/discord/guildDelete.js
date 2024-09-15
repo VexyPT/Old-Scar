@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
-const { db } = require("../utils");
+const { db } = require("../../utils");
 
 module.exports = {
     name: "guildDelete",

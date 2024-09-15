@@ -1,4 +1,4 @@
-const { scheduleNextCheck } = require("../utils");
+const { scheduleNextCheck } = require("../../../utils");
 
 module.exports = {
     name: "ready",

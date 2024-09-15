@@ -1,4 +1,4 @@
-const { handleInteraction } = require("../utils/componentLoader"); 
+const { handleInteraction } = require("../../utils/componentLoader"); 
 
 module.exports = {
     name: "interactionCreate",
