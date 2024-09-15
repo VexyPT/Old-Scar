@@ -42,7 +42,3 @@ process.on("uncaughtExceptionMonitor", (err, origin) => {
   console.log("[antiCrash] :: Uncaught Exception/Catch (MONITOR)" + err.message);
   console.log(err, origin);
 });
-process.on("multipleResolves", (type, promise, reason) => {
-  console.log("[antiCrash] :: Multiple Resolves" + reason);
-  console.log(type, promise, reason);
-});

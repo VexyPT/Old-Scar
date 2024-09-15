@@ -5,7 +5,6 @@ const path = require('path');
 
 module.exports = (client) => {
 
-// Load Prefix Commands
 const loadPrefixCommands = (dir) => {
   const prefixCommandFiles = fs.readdirSync(dir);
 
@@ -14,7 +13,6 @@ const loadPrefixCommands = (dir) => {
     const stat = fs.lstatSync(filePath);
 
     if (stat.isDirectory()) {
-      // Se for uma subpasta, chama a função novamente
       loadPrefixCommands(filePath);
     } else if (file.endsWith(".js")) {
       const command = require(filePath);
@@ -24,7 +22,6 @@ const loadPrefixCommands = (dir) => {
   }
 };
 
-// Load Slash Commands
 const loadSlashCommands = (dir) => {
   const slashCommandFiles = fs.readdirSync(dir);
 
@@ -33,7 +30,6 @@ const loadSlashCommands = (dir) => {
     const stat = fs.lstatSync(filePath);
 
     if (stat.isDirectory()) {
-      // Se for uma subpasta, chama a função novamente
       loadSlashCommands(filePath);
     } else if (file.endsWith(".js")) {
       const command = require(filePath);
@@ -200,22 +196,31 @@ loadSlashCommands(path.join(__dirname, '../commands/slash'));
     }
   });
 
-  // Load Events
-    const eventFiles = fs.readdirSync("./src/events").filter(file => file.endsWith(".js"));
+  const loadEvents = (dir) => {
+    const eventFiles = fs.readdirSync(dir);
+
     for (const file of eventFiles) {
-        const event = require(`../events/${file}`);
+        const filePath = path.join(dir, file);
+        const stat = fs.lstatSync(filePath);
 
-        
-        const eventName = event.customName ? event.customName : event.name;
+        if (stat.isDirectory()) {
+            loadEvents(filePath);
+        } else if (file.endsWith('.js')) {
+            const event = require(filePath);
+            const eventName = event.customName ? event.customName : event.name;
 
-        if (event.once) {
-            client.once(event.name, (...args) => event.execute(...args, client));
-            console.log(`Event loaded (once): ${eventName}`);
-        } else {
-            client.on(event.name, (...args) => event.execute(...args, client));
-            console.log(`Event loaded: ${eventName}`);
+            if (event.once) {
+                client.once(event.name, (...args) => event.execute(...args, client));
+                console.log(`Event loaded (once): ${eventName}`);
+            } else {
+                client.on(event.name, (...args) => event.execute(...args, client));
+                console.log(`Event loaded: ${eventName}`);
+            }
         }
     }
+  };
+
+  loadEvents(path.join(__dirname, "../events"));
 
   async function sendSlashCommandLog(interaction) {
     const logChannel = client.channels.cache.get(client.settings.channels.commands);
