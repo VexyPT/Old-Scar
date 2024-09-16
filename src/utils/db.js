@@ -63,41 +63,6 @@ const db = {
     },
   },
 
-  tempRoles: {
-    async get(userID, guildID) {
-      if (!userID || !guildID) {
-        throw new Error('Objeto de usuário ou servidor inválido');
-      }
-
-      let tempRole = await TempRole.findOne({ userID, guildID });
-
-      if (!tempRole) {
-        throw new Error('Nenhum cargo temporário encontrado');
-      }
-
-      return tempRole;
-    },
-
-    async delete(userID, guildID) {
-      if (!userID || !guildID) {
-        throw new Error('Objeto de usuário ou servidor inválido');
-      }
-
-      const result = await TempRole.deleteOne({ userID, guildID });
-      return result.deletedCount > 0;
-    },
-
-    async create(data) {
-      if (!data || !data.userID || !data.guildID) {
-        throw new Error('Dados inválidos para criar o cargo temporário');
-      }
-
-      const tempRole = new TempRole(data);
-      await tempRole.save();
-      return tempRole;
-    },
-  },
-
   memberCounts: {
     async get(guildID, startDate, endDate) {
       if (!guildID || !startDate || !endDate) {

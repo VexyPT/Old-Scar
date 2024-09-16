@@ -230,6 +230,8 @@ module.exports = {
               const startDate = new Date(today);
               const endDate = new Date(today);
 
+              await interaction.deferReply({ ephemeral: true });
+
               try {
                   const todayStats = await db.memberCounts.get(guildID, startDate, endDate);
 
@@ -267,10 +269,9 @@ module.exports = {
                       })
                   );
 
-                  const message = await interaction.reply({
+                  const message = await interaction.editReply({
                       embeds: [embed],
-                      components: [buttons],
-                      ephemeral: true // Tornar a mensagem inicial efémera
+                      components: [buttons]
                   });
 
                   // Collector para responder aos botões
@@ -319,7 +320,7 @@ module.exports = {
                         const totalJoins = memberCounts.reduce((sum, count) => sum + count.joins, 0);
                         const totalLeaves = memberCounts.reduce((sum, count) => sum + count.leaves, 0);
                 
-                        const description = `**Entradas:** ${totalJoins}\n**Saídas:** ${totalLeaves}\n**Diferença:** ${totalJoins - totalLeaves}`;
+                        const description = `### Nas últimas 24 horas\n-# **Entradas:** \`${totalJoins}\`\n-# **Saídas:** \`${totalLeaves}\`\n-# **Diferença:** \`${totalJoins - totalLeaves}\``;
                 
                         const updatedEmbed = new EmbedBuilder()
                             .setTitle('Estatísticas do Servidor')
@@ -363,7 +364,7 @@ module.exports = {
                         });
                     } catch (error) {
                         console.error('Erro ao buscar estatísticas:', error);
-                        await i.reply({ content: 'Houve um erro ao buscar as estatísticas.', ephemeral: true });
+                        await i.editReply({ content: 'Houve um erro ao buscar as estatísticas.', ephemeral: true });
                     }
                 });
 
@@ -373,14 +374,14 @@ module.exports = {
                           buttons.components.map(button => button.setDisabled(true))
                       );
 
-                      interaction.editReply({
+                      interaction.editReply({ 
                           components: [disabledButtons]
                       });
                   });
 
               } catch (error) {
                   console.error(`Erro ao buscar contagem de membros para o servidor ${guildID}:`, error);
-                  await interaction.reply({
+                  await interaction.editReply({
                       content: "Houve um erro ao buscar as estatísticas do servidor.",
                       ephemeral: true
                   });
