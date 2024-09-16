@@ -18,27 +18,6 @@ module.exports = {
                 (x) => x.send({ embeds: [logEmbed] })
             );
             
-            // Temporarimente desabilitado
-            /*const welcomeChannel = guild.channels.cache.find(
-                (channel) => channel.type
-                 === 
-                 ChannelType.GuildText 
-                 && 
-                 guild.channel.permissionsFor(client.user)
-                 .has([PermissionsBitField.Flags.SendMessages, PermissionsBitField.Flags.EmbedLinks])
-            );
-
-            if(welcomeChannel){
-                const embedNewServer = new EmbedBuilder()
-                .setColor(`${client.settings.colors.success}`)
-                .setDescription("Olá! Eu sou o Stawni, obrigado por me adicionar ao servidor!");
-
-                await welcomeChannel.send({
-                    embeds: [embedNewServer]
-                });
-            }*/
-            
-
         } catch(error) {
             console.log("Failed to create guild", error);
         }

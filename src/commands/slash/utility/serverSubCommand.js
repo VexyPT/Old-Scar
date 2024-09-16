@@ -4,12 +4,13 @@ const { EmbedBuilder, ActionRowBuilder, ComponentType,
     ApplicationCommandOptionType,
     formatEmoji } = require("discord.js");
 const { e, eId, db, t, color } = require("../../../utils");
+const MemberCount = require("../../../models/MemberCountSettings.js");
 
 module.exports = {
     name: "server",
     description: "Get information about the server",
     description_localizations: {
-        "pt-BR": "Obtenha informações sobre o servidor",
+      "pt-BR": "Obtenha informações sobre o servidor",
     },
     type: ApplicationCommandType.ChatInput,
     options: [
@@ -17,20 +18,29 @@ module.exports = {
             name: "badges",
             description: "Get the server badges",
             description_localizations: {
-                "pt-BR": "Obtenha as badges do servidor",
+              "pt-BR": "Obtenha as badges do servidor",
             },
             type: ApplicationCommandOptionType.Subcommand
+        },
+        {
+          name: "statistics",
+          name_localizations: {
+            "pt-BR": "estatísticas"
+          },
+          description: "Shows server statistics",
+          description_localizations: {
+            "pt-BR": "Mostra estatísticas do servidor."
+          },
+          type: ApplicationCommandOptionType.Subcommand
         }
     ],
-    devOnly: false,
-    premium: false,
     async execute(interaction) {
         const { options, guild, client, user } = interaction;
         const language = (await db.users.get(user)).language;
 
         if (!guild) {
             return interaction.reply({
-                content: t("permissions.permissions.permissions.permissions.permissions.permissions.permissions.permissions.guildOnly", {
+                content: t("permissions.guildOnly", {
                     locale: language,
                     replacements: {
                         denyEmoji: e.deny
@@ -207,6 +217,176 @@ module.exports = {
                 });
 
                 break;
+            }
+
+            case "statistics": {
+              const { guild, user } = interaction;
+              const guildID = guild.id;
+              const language = (await db.users.get(user)).language;
+              const guildSettings = await db.guilds.get(guild);
+
+              const today = new Date();
+              today.setHours(0, 0, 0, 0);
+              const startDate = new Date(today);
+              const endDate = new Date(today);
+
+              try {
+                  const todayStats = await db.memberCounts.get(guildID, startDate, endDate);
+
+                  const embed = new EmbedBuilder({
+                      color: color.default,
+                      title: "Estatísticas do Servidor",
+                      description: `### Nas últimas 24 horas\n-# **Entradas:** \`${todayStats.totalJoins}\`\n-# **Saídas:** \`${todayStats.totalLeaves}\`\n-# **Diferença:** \`${todayStats.totalJoins - todayStats.totalLeaves}\``
+                  });
+
+                  const buttons = new ActionRowBuilder().addComponents(
+                      new ButtonBuilder({
+                          customId: "todayStats",
+                          label: "Hoje",
+                          style: ButtonStyle.Secondary,
+                          disabled: true
+                      }),
+                      new ButtonBuilder({
+                          customId: "7daysStats",
+                          label: "Últimos 7 dias",
+                          style: ButtonStyle.Secondary
+                      }),
+                      new ButtonBuilder({
+                          customId: "30daysStats",
+                          label: "Últimos 30 dias",
+                          emoji: guildSettings.premium ? eId.blueStars : eId.premium,
+                          style: guildSettings.premium ? ButtonStyle.Secondary : ButtonStyle.Primary,
+                          disabled: !guildSettings.premium
+                      }),
+                      new ButtonBuilder({
+                          customId: "yearStats",
+                          label: "Último ano",
+                          emoji: guildSettings.premium ? eId.blueStars : eId.premium,
+                          style: guildSettings.premium ? ButtonStyle.Secondary : ButtonStyle.Primary,
+                          disabled: !guildSettings.premium
+                      })
+                  );
+
+                  const message = await interaction.reply({
+                      embeds: [embed],
+                      components: [buttons],
+                      ephemeral: true // Tornar a mensagem inicial efémera
+                  });
+
+                  // Collector para responder aos botões
+                  const filter = (i) => i.user.id === user.id; // Apenas o usuário que executou o comando pode interagir
+                  const collector = message.createMessageComponentCollector({ filter, componentType: ComponentType.Button, time: 60000 });
+
+                  collector.on('collect', async (i) => {
+                    let startDate, endDate;
+                
+                    switch (i.customId) {
+                        case 'todayStats':
+                            startDate = new Date();
+                            endDate = new Date();
+                            startDate.setHours(0, 0, 0, 0);
+                            endDate.setHours(23, 59, 59, 999);
+                            break;
+                        case '7daysStats':
+                            endDate = new Date();
+                            startDate = new Date();
+                            startDate.setDate(startDate.getDate() - 7);
+                            startDate.setHours(0, 0, 0, 0);
+                            break;
+                        case '30daysStats':
+                            endDate = new Date();
+                            startDate = new Date();
+                            startDate.setDate(startDate.getDate() - 30);
+                            startDate.setHours(0, 0, 0, 0);
+                            break;
+                        case 'yearStats':
+                            endDate = new Date();
+                            startDate = new Date();
+                            startDate.setFullYear(startDate.getFullYear() - 1);
+                            startDate.setHours(0, 0, 0, 0);
+                            break;
+                        default:
+                            return;
+                    }
+                
+                    try {
+                        // Realiza a consulta ao banco de dados e calcula os totais
+                        const memberCounts = await MemberCount.find({
+                            guildID: interaction.guild.id,
+                            date: { $gte: startDate, $lte: endDate }
+                        });
+                
+                        const totalJoins = memberCounts.reduce((sum, count) => sum + count.joins, 0);
+                        const totalLeaves = memberCounts.reduce((sum, count) => sum + count.leaves, 0);
+                
+                        const description = `**Entradas:** ${totalJoins}\n**Saídas:** ${totalLeaves}\n**Diferença:** ${totalJoins - totalLeaves}`;
+                
+                        const updatedEmbed = new EmbedBuilder()
+                            .setTitle('Estatísticas do Servidor')
+                            .setDescription(description || 'Nenhum dado disponível para o período selecionado.');
+                
+                        // Atualiza os botões, desativando o que foi selecionado
+                        const updatedButtons = new ActionRowBuilder().addComponents(
+                            new ButtonBuilder({
+                                customId: "todayStats",
+                                label: "Hoje",
+                                style: ButtonStyle.Secondary,
+                                disabled: i.customId === "todayStats"
+                            }),
+                            new ButtonBuilder({
+                                customId: "7daysStats",
+                                label: "Últimos 7 dias",
+                                style: ButtonStyle.Secondary,
+                                disabled: i.customId === "7daysStats"
+                            }),
+                            new ButtonBuilder({
+                                customId: "30daysStats",
+                                label: "Últimos 30 dias",
+                                emoji: guildSettings.premium ? eId.blueStars : eId.premium,
+                                style: guildSettings.premium ? ButtonStyle.Secondary : ButtonStyle.Primary,
+                                disabled: !guildSettings.premium || i.customId === "30daysStats"
+                            }),
+                            new ButtonBuilder({
+                                customId: "yearStats",
+                                label: "Último ano",
+                                emoji: guildSettings.premium ? eId.blueStars : eId.premium,
+                                style: guildSettings.premium ? ButtonStyle.Secondary : ButtonStyle.Primary,
+                                disabled: !guildSettings.premium || i.customId === "yearStats"
+                            })
+                        );
+                
+                        // Atualiza a resposta com os novos dados
+                        await i.update({
+                            embeds: [updatedEmbed],
+                            components: [updatedButtons],
+                            ephemeral: true
+                        });
+                    } catch (error) {
+                        console.error('Erro ao buscar estatísticas:', error);
+                        await i.reply({ content: 'Houve um erro ao buscar as estatísticas.', ephemeral: true });
+                    }
+                });
+
+                  collector.on('end', collected => {
+                      // Quando o coletor expira, desabilitamos os botões
+                      const disabledButtons = new ActionRowBuilder().addComponents(
+                          buttons.components.map(button => button.setDisabled(true))
+                      );
+
+                      interaction.editReply({
+                          components: [disabledButtons]
+                      });
+                  });
+
+              } catch (error) {
+                  console.error(`Erro ao buscar contagem de membros para o servidor ${guildID}:`, error);
+                  await interaction.reply({
+                      content: "Houve um erro ao buscar as estatísticas do servidor.",
+                      ephemeral: true
+                  });
+              }
+
+              break;
             }
         }
     }

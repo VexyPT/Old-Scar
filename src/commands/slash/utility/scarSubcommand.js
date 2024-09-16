@@ -73,7 +73,6 @@ module.exports = {
           ephemeral: true
         });
 
-
         break;
       }
     }

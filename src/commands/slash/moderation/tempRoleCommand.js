@@ -228,7 +228,7 @@ module.exports = {
                   return interaction.reply({ embeds: [embedError], ephemeral: true });
                 }
 
-                const userTempRolesCount = await TempRole.countDocuments({ guildID: guild.id, userID: user.id });
+                const userTempRolesCount = await TempRole.countDocuments({ guildID: guild.id, userId: user.id });
                 const maxTempRoles = premiumGuild ? 15 : 3;
 
                 if (userTempRolesCount >= maxTempRoles) {

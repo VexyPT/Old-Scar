@@ -1,10 +1,16 @@
-const { handleInteraction } = require("../../utils/componentLoader"); 
+const { handleInteraction } = require("../../utils/componentLoader.js");
 
 module.exports = {
     name: "interactionCreate",
-    customName: "LoadComponents",
     async execute(interaction) {
-        if (!interaction.isButton() && !interaction.isStringSelectMenu() && !interaction.isModalSubmit()) return;
-        handleInteraction(interaction);
+        if (
+            interaction.isButton() ||
+            interaction.isStringSelectMenu() ||
+            interaction.isModalSubmit() ||
+            interaction.isUserSelectMenu() ||
+            interaction.isRoleSelectMenu()
+        ) {
+            handleInteraction(interaction);
+        }
     }
 };
