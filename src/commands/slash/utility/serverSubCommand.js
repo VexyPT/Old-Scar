@@ -298,6 +298,11 @@ module.exports = {
                         style: ButtonStyle.Secondary
                     }),
                     new ButtonBuilder({
+                      customId: "14daysStats",
+                      label: t("serverStats.buttonLabel.14d", { locale: language }),
+                      style: ButtonStyle.Secondary
+                    }),
+                    new ButtonBuilder({
                         customId: "30daysStats",
                         label: t("serverStats.buttonLabel.30d", { locale: language }),
                         emoji: guildSettings.premium ? eId.blueStars : eId.premium,
@@ -337,6 +342,14 @@ module.exports = {
                       endDate = new Date();
                       startDate = new Date();
                       startDate.setDate(startDate.getDate() - 7);
+                      startDate.setHours(0, 0, 0, 0);
+                      statsTitle = t("serverStats.statsTitle7d", { locale: language });
+                      break;
+                    }
+                    case "14daysStats": {
+                      endDate = new Date();
+                      startDate = new Date();
+                      startDate.setDate(startDate.getDate() - 14);
                       startDate.setHours(0, 0, 0, 0);
                       statsTitle = t("serverStats.statsTitle7d", { locale: language });
                       break;
@@ -413,6 +426,12 @@ module.exports = {
                           label: t("serverStats.buttonLabel.7d", { locale: language }),
                           style: ButtonStyle.Secondary,
                           disabled: i.customId === "7daysStats"
+                      }),
+                      new ButtonBuilder({
+                        customId: "14daysStats",
+                        label: t("serverStats.buttonLabel.14d", { locale: language }),
+                        style: ButtonStyle.Secondary,
+                        disabled: i.customId === "14daysStats"
                       }),
                       new ButtonBuilder({
                           customId: "30daysStats",

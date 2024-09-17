@@ -1,5 +1,5 @@
 {
-  "mention": "{{scarEmoji}} Olá {{user}}! O Meu prefixo neste servidor é `{{serverPrefix}}`, para veres os meus comandos, usa `{{serverPrefix}}ajuda`!",
+  "mention": "{{scarEmoji}} Olá {{user}}! O Meu prefixo neste servidor é `{{serverPrefix}}` ou `/`. Para ver meus comandos, use `{{serverPrefix}}ajuda` ou `/ajuda`!",
   "permissions": {
     "meMissingManageGuildPermission": "{{denyEmoji}} Não tens a permissão `Gerenciar o Servidor`.",
     "meMissingManageRolesPermission": "{{denyEmoji}} Não tens a permissão `Gerenciar Cargos`.",
@@ -116,6 +116,7 @@
   "serverStats": {
     "statsTitle24h": "Estatísticas das últimas 24 horas",
     "statsTitle7d": "Estatísticas dos últimos 7 dias",
+    "statsTitle14d": "Estatísticas dos últimos 14 dias",
     "statsTitle30d": "Estatísticas dos últimos 30 dias",
     "statsTitle365d": "Estatísticas dos últimos 365 dias",
     "embedTitle": "Estatísticas do Servidor",
@@ -123,6 +124,7 @@
     "buttonLabel": {
       "24h": "Hoje",
       "7d": "Últimos 7 dias",
+      "14d": "Últimos 14 dias",
       "30d": "Últimos 30 dias",
       "365d": "Últimos 365 dias"
     },

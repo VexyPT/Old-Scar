@@ -1,5 +1,5 @@
 {
-  "mention": "{{scarEmoji}} Hello {{user}}! My prefix in this server is `{{serverPrefix}}`. To see my commands, use `{{serverPrefix}}help`!",
+  "mention": "{{scarEmoji}} Hello {{user}}! My prefix in this server is `{{serverPrefix}}` or `/`. To see my commands, use `{{serverPrefix}}help` or `/help`!",
   "permissions": {
     "meMissingManageGuildPermission": "{{denyEmoji}} You don't have the `Manage Server` permission.",
     "meMissingManageRolesPermission": "{{denyEmoji}} You don't have the `Manage Roles` permission.",
@@ -116,6 +116,7 @@
   "serverStats": {
     "statsTitle24h": "Statistics for the last 24 hours",
     "statsTitle7d": "Statistics for the last 7 days",
+    "statsTitle14d": "Statistics for the last 14 days",
     "statsTitle30d": "Statistics for the last 30 days",
     "statsTitle365d": "Statistics for the last 365 days",
     "embedTitle": "Server Statistics",
@@ -123,6 +124,7 @@
     "buttonLabel": {
       "24h": "Today",
       "7d": "Last 7 days",
+      "14d": "Last 14 days",
       "30d": "Last 30 days",
       "365d": "Last 365 days"
     },
