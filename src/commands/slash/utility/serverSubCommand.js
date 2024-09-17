@@ -351,7 +351,7 @@ module.exports = {
                       startDate = new Date();
                       startDate.setDate(startDate.getDate() - 14);
                       startDate.setHours(0, 0, 0, 0);
-                      statsTitle = t("serverStats.statsTitle7d", { locale: language });
+                      statsTitle = t("serverStats.statsTitle14d", { locale: language });
                       break;
                     }
                     case "30daysStats": {
