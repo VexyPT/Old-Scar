@@ -112,5 +112,21 @@
         "description": "{{brushEmoji}} **Cargo:** {{role}}\n{{gearEmoji}} **Adicionado por:** <@{{staffID}}> | `{{staffID}}`\n{{postEmoji}} **Motivo:** `{{reason}}`\n{{timeEmoji}} **Expira** <t:{{expiresAt}}:F>"
       }
     }
+  },
+  "serverStats": {
+    "statsTitle24h": "Estatísticas das últimas 24 horas",
+    "statsTitle7d": "Estatísticas dos últimos 7 dias",
+    "statsTitle30d": "Estatísticas dos últimos 30 dias",
+    "statsTitle365d": "Estatísticas dos últimos 365 dias",
+    "embedTitle": "Estatísticas do Servidor",
+    "description": "### Dados atuais\n-# **Nome do Servidor:** {{guildName}} {{guildBadges}}\n-# **Total de membros:** `{{totalMembers}}`\n-# **Total de apps:** `{{totalApps}}`\n-# **Total de canais:** `{{totalChannels}}`\n-# **Total de cargos:** `{{totalRoles}}`\n-# **Região:** `{{region}}`\n-# **Criado em:** {{createdAt}}\n-# **Nível de impulso:** `{{boostLevel}}`\n-# **Quantidade de impulsos:** `{{boosts}}`\n-# **Monetização:** {{isMonetized}}\n### {{statsTitle}}\n-# **Entradas:** `{{totalJoins}}`\n-# **Saídas:** `{{totalLeaves}}`\n-# **Diferença:** `{{difference}}`\n-# **Porcentagem de Retenção:** `{{retentionPercentage}}%`",
+    "buttonLabel": {
+      "24h": "Hoje",
+      "7d": "Últimos 7 dias",
+      "30d": "Últimos 30 dias",
+      "365d": "Últimos 365 dias"
+    },
+    "noInfoAvailable": "{{denyEmoji}} Nenhuma informação disponível para o período de tempo selecionado.",
+    "errorFetchingStatus": "{{denyEmoji}} Ocorreu um erro ao buscar estatísticas do servidor."
   }
 }

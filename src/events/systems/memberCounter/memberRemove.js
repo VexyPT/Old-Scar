@@ -1,8 +1,8 @@
-const MemberCount = require("../../models/MemberCountSettings");
+const MemberCount = require("../../../models/MemberCountSettings");
 
 module.exports = {
-  name: "guildMemberAdd",
-  customName: "memberCountAdd",
+  name: "guildMemberRemove",
+  customName: "memberCountRemove",
   async execute (member) {
 
     const guildID = member.guild.id;
@@ -12,11 +12,11 @@ module.exports = {
     try {
       await MemberCount.findOneAndUpdate(
         { guildID, date: today },
-        { $inc: { joins: 1 } },
+        { $inc: { leaves: 1 } },
         { upsert: true, new: true }
       );
     } catch (error) {
       console.error(`Erro ao atualizar contagem de membros que saíram no servidor ${guildID}:`, error);
     }
   }
-};
+}
