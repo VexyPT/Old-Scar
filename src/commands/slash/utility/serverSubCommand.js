@@ -223,8 +223,10 @@ module.exports = {
             case "statistics": {
 
               const { guild, user} = interaction;
-
               const guildID = guild.id;
+
+              await interaction.deferReply();
+
               const language = (await db.users.get(user)).language;
               const guildSettings = await db.guilds.get(guild);
 
@@ -233,14 +235,14 @@ module.exports = {
               const startDate = new Date(today);
               const endDate = new Date();
 
-              await interaction.deferReply();
-
               try {
                 const todayStats = await db.memberCounts.get(guildID, startDate, endDate);
                 let statsTitle = t("serverStats.statsTitle24h", { locale: language });
+                const members = await guild.members.fetch(); // force the update
 
-                const totalMembers = guild.members.cache.filter(member => !member.user.bot).size;
-                const totalApps = guild.members.cache.filter(member => member.user.bot).size;
+                const totalMembers = members.filter(member => !member.user.bot).size;
+                const totalApps = members.filter(member => member.user.bot).size;
+
                 const guildName = guild.name.length > 30 ? guild.name.slice(0, 30 - 3) + "..." : guild.name;
                 const guildBadges = `${guild.features.includes(GuildFeature.Verified) ? `${e.guildVerified}` : ""}${guild.features.includes(GuildFeature.Partnered) ? `${e.guildPartnered}` : ""}${guild.features.includes(GuildFeature.Community) ? `${e.guildCommunity}` : ""}${guild.features.includes(GuildFeature.Discoverable) ? `${e.guildDiscoverable}` : ""}`
                 const totalChannels = guild.channels.cache.size;
@@ -327,6 +329,7 @@ module.exports = {
                       endDate = new Date();
                       startDate.setHours(0, 0, 0, 0);
                       endDate.setHours(23, 59, 59, 999);
+                      statsTitle = t("serverStats.statsTitle24h", { locale: language });
                       break;
                     }
                     case "7daysStats": {
@@ -359,7 +362,7 @@ module.exports = {
 
                   try {
                     // Queries the database and calculates the totals
-                    const memberCounts = await MemberCount.findOneAndUpdate({
+                    const memberCounts = await MemberCount.find({
                       guildID,
                       date: { $gte: startDate, $lte: endDate }
                     });
@@ -369,6 +372,7 @@ module.exports = {
                     const UpdatedRetentionPercentage = totalJoins > 0 ? ((totalJoins - totalLeaves) / totalJoins) * 100 : 0;
 
                     const updatedEmbed = new EmbedBuilder({
+                      color: color.default,
                       title: t("serverStats.embedTitle", { locale: language }),
                       description: t("serverStats.description", {
                         locale: language,
@@ -391,12 +395,14 @@ module.exports = {
                           retentionPercentage: UpdatedRetentionPercentage.toFixed(2)
                         }
                       }) || t("serverStats.noInfoAvailable", { locale: language }),
+                      image: hasBanner ? { url: hasBanner } : undefined,
+                      thumbnail: hasIcon ? { url: hasIcon } : undefined
                     });
 
                     const updatedButtons = new ActionRowBuilder().addComponents(
                       new ButtonBuilder({
                         customId: "todayStats",
-                        label: t("serverStats.buttonLabel.24hours", { locale: language }),
+                        label: t("serverStats.buttonLabel.24h", { locale: language }),
                         style: ButtonStyle.Secondary,
                         disabled: i.customId === "todayStats"
                       }),
@@ -427,14 +433,19 @@ module.exports = {
                       components: [updatedButtons]
                     });
                   } catch (error) {
+                    const disabledButtons = new ActionRowBuilder().addComponents(
+                      buttons.components.map(button => button.setDisabled(true))
+                    );
+
                     console.error("Erro ao buscar estatísticas do servidor " + guild.name + " | " + guild.id + "\n" + error);
-                    await i.editReply({
+                    await interaction.editReply({
                       content: t("serverStats.noInfoAvailable", {
                         locale: language,
                         replacements: {
                           denyEmoji: e.deny
                         }
-                      })
+                      }),
+                      components: [disabledButtons]
                     });
                   }
                 });
@@ -447,6 +458,10 @@ module.exports = {
                   interaction.editReply({ components: [disabledButtons] });
                 });
               } catch (error) {
+                const disabledButtons = new ActionRowBuilder().addComponents(
+                  buttons.components.map(button => button.setDisabled(true))
+                );
+
                 console.log("Erro ao responder ao comando statistics " + guild.name + " | " + guild.id + "\n" + error);
                 await interaction.editReply({
                   content: t("serverStats.errorFetchingStatus", {
@@ -454,7 +469,8 @@ module.exports = {
                     replacements: {
                       denyEmoji: e.deny
                     }
-                  })
+                  }),
+                  components: [disabledButtons]
                 });
               }
 

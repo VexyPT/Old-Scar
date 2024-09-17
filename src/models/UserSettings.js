@@ -8,7 +8,8 @@ const userSchema = new Schema({
     isBanned: { type: Boolean, default: false },
     since: { type: Date, default: null },
     reason: { type: String, default: null }
-  }
+  },
+  isSuspect: { type: Boolean, default: false },
 });
 
 module.exports = model("UserSettings", userSchema);
