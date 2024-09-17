@@ -119,7 +119,7 @@
     "statsTitle30d": "Estatísticas dos últimos 30 dias",
     "statsTitle365d": "Estatísticas dos últimos 365 dias",
     "embedTitle": "Estatísticas do Servidor",
-    "description": "### Dados atuais\n-# **Nome do Servidor:** {{guildName}} {{guildBadges}}\n-# **Total de membros:** `{{totalMembers}}`\n-# **Total de apps:** `{{totalApps}}`\n-# **Total de canais:** `{{totalChannels}}`\n-# **Total de cargos:** `{{totalRoles}}`\n-# **Região:** `{{region}}`\n-# **Criado em:** {{createdAt}}\n-# **Nível de impulso:** `{{boostLevel}}`\n-# **Quantidade de impulsos:** `{{boosts}}`\n-# **Monetização:** {{isMonetized}}\n### {{statsTitle}}\n-# **Entradas:** `{{totalJoins}}`\n-# **Saídas:** `{{totalLeaves}}`\n-# **Diferença:** `{{difference}}`\n-# **Porcentagem de Retenção:** `{{retentionPercentage}}%`",
+    "description": "### Dados atuais\n-# **Nome do Servidor:** {{guildName}} {{guildBadges}}\n-# **Total de membros:** `{{totalMembers}}`\n-# **Total de apps:** `{{totalApps}}`\n-# **Total de canais:** `{{totalChannels}}`\n-# **Total de cargos:** `{{totalRoles}}`\n-# **Região:** `{{region}}`\n-# **Criado em:** {{createdAt}}\n-# **Nível de impulso:** `{{boostLevel}}`\n-# **Quantidade de impulsos:** `{{boosts}}`\n-# **Monetização:** {{isMonetized}}\n### {{statsTitle}} {{betaEmoji}}\n-# **Entradas:** `{{totalJoins}}`\n-# **Saídas:** `{{totalLeaves}}`\n-# **Diferença:** `{{difference}}`\n-# **Porcentagem de Retenção:** `{{retentionPercentage}}%`",
     "buttonLabel": {
       "24h": "Hoje",
       "7d": "Últimos 7 dias",
