@@ -243,8 +243,10 @@ module.exports = {
                 const totalMembers = members.filter(member => !member.user.bot).size;
                 const totalApps = members.filter(member => member.user.bot).size;
 
-                const guildName = guild.name.length > 30 ? guild.name.slice(0, 30 - 3) + "..." : guild.name;
-                const guildBadges = `${guild.features.includes(GuildFeature.Verified) ? `${e.guildVerified}` : ""}${guild.features.includes(GuildFeature.Partnered) ? `${e.guildPartnered}` : ""}${guild.features.includes(GuildFeature.Community) ? `${e.guildCommunity}` : ""}${guild.features.includes(GuildFeature.Discoverable) ? `${e.guildDiscoverable}` : ""}`
+                const guildBadges = guild.features.includes(GuildFeature.Verified) ? `${e.guildVerified}` :
+                    guild.features.includes(GuildFeature.Partnered) ? `${e.guildPartnered}` :
+                    guild.features.includes(GuildFeature.Discoverable) ? `${e.guildDiscoverable}` :
+                    guild.features.includes(GuildFeature.Community) ? `${e.guildCommunity}` : "";
                 const totalChannels = guild.channels.cache.size;
                 const totalRoles = guild.roles.cache.size;
                 const region = guild.preferredLocale;

@@ -10,6 +10,7 @@ const userSchema = new Schema({
     reason: { type: String, default: null }
   },
   isSuspect: { type: Boolean, default: false },
+  verified: { type: Boolean, default: false },
 });
 
 module.exports = model("UserSettings", userSchema);
