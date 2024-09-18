@@ -243,6 +243,7 @@ module.exports = {
                 const totalMembers = members.filter(member => !member.user.bot).size;
                 const totalApps = members.filter(member => member.user.bot).size;
 
+                const guildName = guild.name;
                 const guildBadges = guild.features.includes(GuildFeature.Verified) ? `${e.guildVerified}` :
                     guild.features.includes(GuildFeature.Partnered) ? `${e.guildPartnered}` :
                     guild.features.includes(GuildFeature.Discoverable) ? `${e.guildDiscoverable}` :
