@@ -456,10 +456,6 @@ module.exports = {
                       components: [updatedButtons]
                     });
                   } catch (error) {
-                    const disabledButtons = new ActionRowBuilder().addComponents(
-                      buttons.components.map(button => button.setDisabled(true))
-                    );
-
                     console.error("Erro ao buscar estatísticas do servidor " + guild.name + " | " + guild.id + "\n" + error);
                     await interaction.editReply({
                       content: t("serverStats.noInfoAvailable", {
@@ -468,7 +464,7 @@ module.exports = {
                           denyEmoji: e.deny
                         }
                       }),
-                      components: [disabledButtons]
+                      components: []
                     });
                   }
                 });
@@ -481,10 +477,6 @@ module.exports = {
                   interaction.editReply({ components: [disabledButtons] });
                 });
               } catch (error) {
-                const disabledButtons = new ActionRowBuilder().addComponents(
-                  buttons.components.map(button => button.setDisabled(true))
-                );
-
                 console.log("Erro ao responder ao comando statistics " + guild.name + " | " + guild.id + "\n" + error);
                 await interaction.editReply({
                   content: t("serverStats.errorFetchingStatus", {
@@ -493,7 +485,7 @@ module.exports = {
                       denyEmoji: e.deny
                     }
                   }),
-                  components: [disabledButtons]
+                  components: []
                 });
               }
 
