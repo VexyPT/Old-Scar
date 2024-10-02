@@ -211,9 +211,11 @@ module.exports = {
                     });
                 });
 
-                collector.on("end", async (msg) => {
-                  if (msg.editable) {
-                    await msg.edit({ components: [] });
+                collector.on("end", async () => {
+                  try {
+                    await interaction.editReply({ components: [] });
+                  } catch (error) {
+                      console.error("(Ignore, the message is probably already deleted, don't worry about it!) Erro ao remover componentes após expiração do coletor:", error);
                   }
                 });
 
@@ -481,16 +483,9 @@ module.exports = {
                       await interaction.editReply({ components: [disabledButtons] }).catch(() => {});
                     }
                   } catch (error) {
-                    console.error("(Ignore, the message is probably already deleted) Error disabling buttons:", error);
+                    console.error("(Ignore, the message is probably already deleted, don't worry about it!) Error disabling buttons:", error);
                   }
                 });
-                /*collector.on("end", collected => {
-                  const disabledButtons = new ActionRowBuilder().addComponents(
-                    buttons.components.map(button => button.setDisabled(true))
-                  );
-
-                  interaction.editReply({ components: [disabledButtons] });
-                });*/
               } catch (error) {
                 console.log("Erro ao responder ao comando statistics " + guild.name + " | " + guild.id + "\n" + error);
                 await interaction.editReply({
