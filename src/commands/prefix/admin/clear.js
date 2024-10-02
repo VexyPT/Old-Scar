@@ -60,8 +60,12 @@ module.exports = {
       ignoredMessages += messages.size - filtered.size;
 
       if (filtered.size > 0) {
-        const deleted = await channel.bulkDelete(filtered, true);
-        deletedMessages += deleted.size;
+        try {
+          const deleted = await channel.bulkDelete(filtered, true);
+          deletedMessages += deleted.size;
+        } catch (error) {
+          console.error("(IGNORAR) Erro ao deletar mensagens:", error);
+        }
       }
     }
 
