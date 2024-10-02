@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema({
   userID: { type: String, required: true, unique: true },
-  language: { type: String, default: "pt-BR" },
+  language: { type: String, default: "en-US" },
   executedCommands: { type: Number, default: 0 },
   blacklist: {
     isBanned: { type: Boolean, default: false },
