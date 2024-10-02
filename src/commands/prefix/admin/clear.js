@@ -1,77 +1,49 @@
-const { ApplicationCommandOptionType, ApplicationCommandType, PermissionFlagsBits } = require("discord.js");
+const { PermissionFlagsBits } = require("discord.js");
 const { t, db, e } = require("../../../utils");
 
 module.exports = {
   name: "clear",
   description: "Delete a specified number of recent messages from the channel",
-  description_localizations: {
-    "pt-BR": "Apaga um número especificado de mensagens recentes do canal"
-  },
-  type: ApplicationCommandType.ChatInput,
-  options: [
-    {
-      name: "amount",
-      name_localizations: {
-        "pt-BR": "quantidade",
-      },
-      description: "The amount of messages to clear (2-1000)",
-      description_localizations: {
-        "pt-BR": "Quantidade de mensagens a limpar (entre 2 e 1000)",
-      },
-      type: ApplicationCommandOptionType.Integer,
-      minValue: 2,
-      maxValue: 1000,
-      required: true
-    }
-  ],
-  async execute(interaction) {
-    const { options, channel, guild, user, client } = interaction;
-    const member = await guild.members.fetch(user.id);
+  usage: "{currentPrefix}clear <amount>",
+  aliases: ["purge"],
+  devOnly: false,
+  async execute(message, args) {
+    const { member, channel, guild, author, client } = message;
+
+    const language = (await db.users.get(author)).language;
     const botMember = await guild.members.fetch(client.user.id);
-    const userdb = await db.users.get(user);
-    const language = userdb.language;
 
     // Verificar permissões do membro
     if (!member.permissions.has(PermissionFlagsBits.ManageMessages)) {
-      return interaction.reply({
+      return message.reply({
         content: t("clearCommand.noPermission", {
           locale: language,
-          replacements: {
-            denyEmoji: e.deny
-          }
-        }),
-        ephemeral: true
+          replacements: { denyEmoji: e.deny }
+        })
       });
     }
+
     // Verificar permissões do bot
     if (!botMember.permissions.has(PermissionFlagsBits.ManageMessages)) {
-      return interaction.reply({
+      return message.reply({
         content: t("clearCommand.botNoPermission", {
           locale: language,
-          replacements: {
-            denyEmoji: e.deny
-          }
-        }),
-        ephemeral: true
+          replacements: { denyEmoji: e.deny }
+        })
       });
     }
 
-    const amount = options.getInteger("amount", true);
+    const amount = parseInt(args[0], 10);
 
     // Verificar se a quantidade está no limite permitido (2 a 1000)
-    if (amount < 2 || amount > 1000) {
-      return interaction.reply({
+    if (isNaN(amount) || amount < 2 || amount > 1000) {
+      return message.reply({
         content: t("clearCommand.invalidAmount", {
           locale: language,
-          replacements: {
-            denyEmoji: e.deny
-          }
-        }),
-        ephemeral: true
+          replacements: { denyEmoji: e.deny, user: author.tag }
+        })
       });
     }
-
-    await interaction.deferReply({ ephemeral: true });
 
     let deletedMessages = 0;
     let ignoredMessages = 0;
@@ -93,9 +65,12 @@ module.exports = {
       }
     }
 
+    // Adicionar 1 à quantidade para incluir a mensagem do comando
+    const totalAmount = amount + 1;
+
     // Se a quantidade for maior que 100, entrar no loop
-    if (amount > 100) {
-      let remaining = amount;
+    if (totalAmount > 100) {
+      let remaining = totalAmount;
       while (remaining > 0) {
         const deleteNow = remaining > 100 ? 100 : remaining;
         await deleteMessages(deleteNow);
@@ -106,19 +81,22 @@ module.exports = {
       }
     } else {
       // Se a quantidade for menor ou igual a 100, apagar de uma vez
-      await deleteMessages(amount);
+      await deleteMessages(totalAmount);
     }
+
+    // Subtrair 1 das mensagens deletadas para não contar a mensagem do comando
+    deletedMessages = Math.max(0, deletedMessages - 1);
 
     // Mensagem de feedback
     let responseMessage;
     if (deletedMessages === 0) {
       responseMessage = t("clearCommand.noMessagesDeleted", { locale: language, replacements: { denyEmoji: e.deny } });
     } else if (deletedMessages < amount) {
-      responseMessage = t("clearCommand.someMessagesDeleted", { locale: language, replacements: { checkEmoji: e.check, denyEmoji: e.deny, deletedMessages, ignoredMessages, user } });
+      responseMessage = t("clearCommand.someMessagesDeleted", { locale: language, replacements: { checkEmoji: e.check, denyEmoji: e.deny, deletedMessages, ignoredMessages, user: author.tag } });
     } else {
-      responseMessage = t("clearCommand.allMessagesDeleted", { locale: language, replacements: { checkEmoji: e.check, deletedMessages, user } });
+      responseMessage = t("clearCommand.allMessagesDeleted", { locale: language, replacements: { checkEmoji: e.check, deletedMessages, user: author.tag } });
     }
 
-    await interaction.editReply({ content: responseMessage });
+    channel.send({ content: responseMessage });
   }
 };

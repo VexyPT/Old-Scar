@@ -130,5 +130,13 @@
     },
     "noInfoAvailable": "{{denyEmoji}} Nenhuma informação disponível para o período de tempo selecionado.",
     "errorFetchingStatus": "{{denyEmoji}} Ocorreu um erro ao buscar estatísticas do servidor."
+  },
+  "clearCommand": {
+    "noPermission": "{{denyEmoji}} Você não tem permissão para gerenciar mensagens.",
+    "botNoPermission": "{{denyEmoji}} Eu não tenho permissão para gerenciar mensagens.",
+    "invalidAmount": "{{denyEmoji}} {{user}} Eu só consigo limpar entre 2 até 1000 mensagens passadas!",
+    "noMessagesDeleted": "{{denyEmoji}} Não consegui encontrar nenhuma mensagem para ser deletada... Eu não consigo deletar mensagens que foram enviadas há mais de duas semanas devido a limitações do Discord!",
+    "someMessagesDeleted": "{{checkEmoji}} O chat teve **{{deletedMessages}}** mensagens deletadas por {{user}}!\n{{denyEmoji}} Porém, **{{ignoredMessages}}** mensagens foram ignoradas por serem muito antigas ou estarem fixadas.",
+    "allMessagesDeleted": "{{checkEmoji}} O chat teve **{{deletedMessages}}** mensagens deletadas por {{user}}!"
   }
 }

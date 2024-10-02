@@ -130,5 +130,13 @@
     },
     "noInfoAvailable": "{{denyEmoji}} No information available for the selected time period.",
     "errorFetchingStatus": "{{denyEmoji}} An error occurred while fetching server statistics."
+  },
+  "clearCommand": {
+    "noPermission": "{{denyEmoji}} You don't have permission to manage messages.",
+    "botNoPermission": "{{denyEmoji}} I don't have permission to manage messages.",
+    "invalidAmount": "{{denyEmoji}} {{user}} I can only clear between 2 to 1000 past messages!",
+    "noMessagesDeleted": "{{denyEmoji}} I couldn't find any messages to delete... I can't delete messages that are older than two weeks due to Discord limitations!",
+    "someMessagesDeleted": "{{checkEmoji}} The chat had **{{deletedMessages}}** messages deleted by {{user}}!\n{{denyEmoji}} However, **{{ignoredMessages}}** messages were ignored for being too old or pinned.",
+    "allMessagesDeleted": "{{checkEmoji}} The chat had **{{deletedMessages}}** messages deleted by {{user}}!"
   }
 }
