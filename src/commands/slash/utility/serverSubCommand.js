@@ -211,7 +211,7 @@ module.exports = {
                     });
                 });
 
-                collector.on("end", async () => {
+                collector.on("end", async (msg) => {
                   if (msg.editable) {
                     await msg.edit({ components: [] });
                   }
@@ -470,13 +470,27 @@ module.exports = {
                   }
                 });
 
-                collector.on("end", collected => {
+                collector.on("end", async (collected) => {
+                  try {
+                    const fetchedMessage = await interaction.fetchReply();
+                    if (fetchedMessage) {
+                      const disabledButtons = new ActionRowBuilder().addComponents(
+                        buttons.components.map(button => ButtonBuilder.from(button).setDisabled(true))
+                      );
+              
+                      await interaction.editReply({ components: [disabledButtons] }).catch(() => {});
+                    }
+                  } catch (error) {
+                    console.error("(Ignore, the message is probably already deleted) Error disabling buttons:", error);
+                  }
+                });
+                /*collector.on("end", collected => {
                   const disabledButtons = new ActionRowBuilder().addComponents(
                     buttons.components.map(button => button.setDisabled(true))
                   );
 
                   interaction.editReply({ components: [disabledButtons] });
-                });
+                });*/
               } catch (error) {
                 console.log("Erro ao responder ao comando statistics " + guild.name + " | " + guild.id + "\n" + error);
                 await interaction.editReply({
