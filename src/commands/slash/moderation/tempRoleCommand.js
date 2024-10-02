@@ -365,9 +365,9 @@ module.exports = {
 
                 collector.on("collect", async i => {
                   
-                  if (i.customId === "previous" && currentPage > 0) {
+                  if (i.customId === "tempRole_previous" && currentPage > 0) {
                     currentPage--;
-                  } else if (i.customId === "next" && currentPage < totalPages -1) {
+                  } else if (i.customId === "tempRole_next" && currentPage < totalPages -1) {
                     currentPage++;
                   }
 
