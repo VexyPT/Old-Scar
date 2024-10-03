@@ -1,0 +1,142 @@
+{
+  "mention": "{{scarEmoji}} Merhaba {{user}}! Prefix' im bu sunucuda `{{serverPrefix}}` veya `/`. Komutlarımı görmek için, `{{serverPrefix}}help` veya `/help` kullan!",
+  "permissions": {
+    "meMissingManageGuildPermission": "{{denyEmoji}} `Sunucuyu Yönet` yetkisine sahip yok.",
+    "meMissingManageRolesPermission": "{{denyEmoji}} `Rolleri Yönet` yetkisine sahip yok.",
+    "otherMissingManageRolesPermission": "{{denyEmoji}} {{user}} `Rolleri Yönet` yetkisine sahip değil.",
+    "botMissingManageRolesPermission": "{{denyEmoji}} `Rolleri Yönet` yetkisine sahip değilim.",
+    "guildOnly": "{{denyEmoji}} Bu komut sadece sunucularda çalıştırılabilir.",
+    "devOnly": "{{denyEmoji}} Erişim reddedildi.",
+    "premiumOnly": "{{denyEmoji}} Erişim reddedildi. **Premium** kullanıcılara özel komut.",
+    "blacklisted": "**Yasaklandınız** ᕙ(⇀‸↼‶)ᕗ\n\nYazık... zavallı kullanıcı yanlış bir şey yapmayı başarmış... kurallarıma uymak gerçekten bu kadar zor mu?{{supportServer}}\n\n**Sebep:**\n> {{reason}}\n**Süre:** Kalıcı\n**Yasaklandığından beri:**\n> {{banDate}}",
+    "blacklistedMessage": "**Yasaklandınız** ᕙ(⇀‸↼‶)ᕗ\n\nYazık... zavallı kullanıcı yanlış bir şey yapmayı başarmış... kurallarıma uymak gerçekten bu kadar zor mu?{{supportServer}}\n\n**Sebep:**\n> {{reason}}\n**Süre:** Kalıcı\n\nEğer haksız olduğuna inandığınız için banınızın kaldırılmasını istiyorsanız (haksız olduğundan şüpheliyim, haha) veya pişmanlık duyuyorsanız (pişmanlık duymanız banınızın kaldırılacağı anlamına gelmez), destek sunucumda bir itirazda bulunmayı deneyin: {{supportServer}}\nAma unutmayın: Pişmanlık duymak hayatınızdaki tüm sorunları sihirli bir şekilde çözmeyecektir; eylemlerinizin sonuçları vardır ve affedilemez bir şey yaptıysanız, banınız kaldırılmayacaktır... Oh, ve eğer destek sunucumdan yasaklanırsanız... bu benim sorunum değil!\n\nRahatsızlık için özür dileriz... Ya da geçerli bir nedenden dolayı yasaklandıysanız, rahatsızlığa katlanın!!!",
+    "unblacklisted": "İtirazınız ekip tarafından kabul edildi ve yasağınız kaldırıldı!\nBu nadir bir şeydir, bu yüzden bu fırsatı kaçırmayın. Tekrar yasaklanmamak için Scar'ın kurallarına uyun! {{scarEmoji}}"
+  },
+  "ping": {
+    "response": "Pong! {{latency}}ms."
+  },
+  "setprefix": {
+    "samePrefix": "{{denyEmoji}} Lütfen mevcut önekten farklı bir önek girin.",
+    "wrongLenght": "{{denyEmoji}} Önek yalnızca **maksimum** `2` karakterden oluşabilir.",
+    "missingArgs": "{{denyEmoji}} Lütfen bir önek girin\n {{rightArrowEmoji}} `{{currentPrefix}} setprefix <new prefix>`",
+    "success": "{{checkEmoji}} Yeni önek `{{newPrefix}} başarıyla ayarlandı."
+  },
+  "setlanguage": {
+    "embedDescription": "İsminizin burada olmasını ister misiniz? Scar'ın çevirilerine aktif olarak katkıda bulunun!",
+    "placeholder": "Bir dil seç",
+    "success": "{{checkEmoji}} Dil başarıyla değiştirildi.",
+    "sameLanguage": "{{denyEmoji}} Halihazırda kullandığınız dile geçiş yapamazsınız."
+  },
+  "serverBadges": {
+    "noBadgesFound": "Rozet bulunamadı.",
+    "noMembersFound": "Üye bulunamadı.",
+    "pages": "Sayfa {{currentPage}} / {{totalPages}}",
+    "peopleWithTheBadge": "Sunucuda bu rozete sahip üyeler:\n\n> {{pageMembers}}",
+    "embedTitle": "Rozetler - {{guildName}}"
+  },
+  "badges": {
+    "staff": "Discord Personeli",
+    "partner": "Sunucu Partner Sahibi",
+    "certifiedModerator": "Sertifikalı Moderatör Mezunu",
+    "hypesquadEvents": "HypeSquad Etkinlikleri",
+    "bravery": "HypeSquad Bravery",
+    "brilliance": "HypeSquad Brilliance",
+    "balance": "HypeSquad Balance",
+    "bugHunter1": "Discord Hata Avcısı",
+    "bugHunter2": "Altın Discord Hata Avcısı",
+    "activeDeveloper": "Aktif Geliştirici",
+    "earlyVerifiedDev": "Erken Onaylanan Bot Geliştiricisi",
+    "earlySupporter": "Erken Dönem Destekçisi"
+  },
+  "tempRole": {
+    "noRolesForUser": "{{denyEmoji}} {{kullanıcı}}'nın yapılandırılmış geçici rolü yok.",
+    "invalidTime": "{{denyEmoji}} Lütfen geçerli bir zaman sınırı kullanın. Örn: 3m, 2h, 1d",
+    "minimumTimeRequirement": "{{denyEmoji}} Ayarlayabileceğiniz minimum süre 5 dakikadır. Lütfen daha uzun bir süre seçin",
+    "durationExceedsLimit": "{{denyEmoji}} Belirttiğiniz süre izin verilen sınırı aşıyor. Premium olmayan sunucular için maksimum süre 31 gündür. Premium kullanıcılar için maksimum süre 366 gündür. Lütfen daha kısa bir süre seçin.",
+    "notEditable": "{{denyEmoji}} Bu rolü atayamam çünkü ya yönetilemez ya da benim rolümün üstünde.",
+    "alreadyHaveTheRole": "{{denyEmoji}} {{user}} zaten bu role sahip.",
+    "memberDoNotHaveTheRole": "{{denyEmoji}} {{user}} bu role sahip değildir.",
+    "invalidRole": "{{denyEmoji}} Bilinmeyen rol",
+    "notHaveRoleToRemove": "{{denyEmoji}} Kaldırılacak bir rol bulunamadı.",
+    "roleNotFound": "{{denyEmoji}} Rol sunucuda bulunamadı.",
+    "noMemberFounded": "{{denyEmoji}} Üye bulunamadı.",
+    "maxTempRolesReachedRegular": "{{denyEmoji}} Aynı kullanıcı için geçici rol sınırını aştınız (`3`)\n> {{hintEmoji}} Premium sunucular üye başına en fazla `15` geçici rol atayabilir.",
+    "maxTempRolesReachedPremium": "{{denyEmoji}} Aynı kullanıcı için geçici rol sınırını aştınız (`15`)",
+    "alreadyTempRoleAssigned": "{{denyEmoji}} Bu geçici rol, veritabanımdaki kullanıcıya zaten atanmıştır. Eğer kaldırmak istiyorsanız </temprole manage:1279875172777721989> kullanın.",
+    "removingFromDatabase": "{{loadingEmoji}} Geçici rolü veritabanımdan kaldırıyorum...",
+    "removedFromDatabase": "{{checkEmoji}} Geçici rol veritabanımdan başarıyla kaldırıldı!",
+    "reasonTooLong": "{{denyEmoji}} Sağlanan neden 50 karakter sınırını aşıyor. Lütfen geçici rol ataması için daha kısa bir neden belirtin.",
+    "reason": "Belirtilmemiş",
+    "success": {
+      "title": "Geçici Rol Eklendi",
+      "description": "{{roleEmoji}} **Rol:** {{role}}\n{{memberEmoji}} **Üye:** {{user}}\n{{postEmoji}} **Sebep:** `{{reason}}`\n{{timeEmoji}} **Bitiş:** <t:{{expiresAt}}:R>"
+    },
+    "noActiveRoles": "{{denyEmoji}} Aktif geçici rol bulunamadı.",
+    "list": "<@{{roleUserID}}> - <@&{{roleID}}> bitiş <t:{{expiresAt}}:R>",
+    "listed": {
+      "title": "Aktif Geçici Roller",
+      "descriptionNotRole": "Bu sayfada aktif geçici rol yok.",
+      "footer": "Sayfa {{currentPage}} / {{totalPages}}"
+    },
+    "manage": {
+      "title": "Geçici Rolleri Yönetme",
+      "description": "Yönetmek için {{user}}'dan geçici bir rol seçin",
+      "select": {
+        "placeholder": "Geçici bir rol seçin",
+        "noRole": "Rol bulunamadı"
+      },
+      "selected": {
+        "title": "Geçici Rolü Yönetme",
+        "description": "**Rol:** <@&{{roleID}}>\n**Bitiş:** <t:{{expiresAt}}:R>"
+      },
+      "remove": {
+        "label": "Rol Kaldırma",
+        "fail": "{{denyEmoji}} Rol kaldırılırken hata oluştu"
+      },
+      "edit": {
+        "modalTitle": "Geçici Görev Süresini Düzenle",
+        "modalPlaceHolder": "Yeni Sona Erme Süresi (örn: 5m, 3h, 1d, 1y)",
+        "modalLabel": "Düzenleme Zamanı",
+        "successDescription": "{{role}} rol {{user}} için tarihinde sona eriyor {{newExpiresAt}}",
+        "buttonLabel": "Son kullanma tarihini düzenle"
+      },
+      "editSuccess": {
+        "title": "Süre Güncellendi",
+        "description": "{{checkEmoji}} {{role}} şimdi <t:{{newExpiresAt}}:R> sona eriyor."
+      },
+      "removedSuccess": {
+        "description": "{{checkEmoji}} **`{{roleName}}`** Rol ({{role}}) başarıyla {{user}}'dan kaldırıldı."
+      },
+      "details": {
+        "title": "Rol Yönetimi",
+        "description": "{{brushEmoji}} **Rol:** {{role}}\n{{gearEmoji}} **Tarafından eklendi:** <@{{staffID}}> | `{{staffID}}`\n{{postEmoji}} **Sebep:** `{{reason}}`\n{{timeEmoji}} **Bitiş** <t:{{expiresAt}}:F>"
+      }
+    }
+  },
+  "serverStats": {
+    "statsTitle24h": "Son 24 Saatin İstatistikleri",
+    "statsTitle7d": "Son 7 Günün İstatistikleri",
+    "statsTitle14d": "Son 14 Günün İstatistikleri",
+    "statsTitle30d": "Son 30 Günün İstatistikleri",
+    "statsTitle365d": "Son 365 Günün İstatistikleri",
+    "embedTitle": "Sunucu İstatistikleri",
+    "description": "### Güncel Veriler\n-# **Sunucu Adı:** {{guildName}} {{guildBadges}}\n-# **Toplam Üye:** `{{totalMembers}}`\n-# **Toplam Uygulama:** `{{totalApps}}`\n-# **Toplam Kanal:** `{{totalChannels}}`\n-# **Toplam Rol:** `{{totalRoles}}`\n-# **Bölge:** `{{region}}`\n-# **Oluşturulma Tarihi:** {{createdAt}}\n-# **Boost Seviyesi:** `{{boostLevel}}`\n-# **Toplam Boost:** `{{boosts}}`\n-# **Paraya Çevirme:** {{isMonetized}}\n### {{statsTitle}} {{betaEmoji}}\n-# **Katılımlar:** `{{totalJoins}}`\n-# **Ayrılanlar:** `{{totalLeaves}}`\n-# **Fark:** `{{difference}}`\n-# **Tutma Yüzdesi:** `{{retentionPercentage}}%`",
+    "buttonLabel": {
+      "24h": "Bugün",
+      "7d": "Son 7 gün",
+      "14d": "Son 14 gün",
+      "30d": "Son 30 gün",
+      "365d": "Son 365 gün"
+    },
+    "noInfoAvailable": "{{denyEmoji}} Seçilen zaman aralığı için bilgi mevcut değil.",
+    "errorFetchingStatus": "{{denyEmoji}} Sunucu istatistikleri alınırken bir hata oluştu."
+  },
+  "clearCommand": {
+    "noPermission": "{{denyEmoji}} Mesajları yönetme izniniz yok.",
+    "botNoPermission": "{{denyEmoji}} Mesajları yönetme iznim yok.",
+    "invalidAmount": "{{denyEmoji}} {{user}} Sadece 2 ile 1000 arasındaki geçmiş mesajları temizleyebilirim!",
+    "noMessagesDeleted": "{{denyEmoji}} Silinecek mesaj bulamadım... İki haftadan daha eski mesajları Discord kısıtlamaları nedeniyle silemiyorum!",
+    "someMessagesDeleted": "{{checkEmoji}} Sohbette **{{deletedMessages}}** mesaj, {{user}} tarafından silindi!\n{{denyEmoji}} Ancak, **{{ignoredMessages}}** mesaj, çok eski veya sabitlenmiş oldukları için göz ardı edildi.",
+    "allMessagesDeleted": "{{checkEmoji}} Sohbette **{{deletedMessages}}** mesaj, {{user}} tarafından silindi!"
+  }
+}

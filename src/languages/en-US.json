@@ -63,7 +63,7 @@
     "maxTempRolesReachedRegular": "{{denyEmoji}} You have exceeded the limit of temporary roles for the same user (`3`)\n> {{hintEmoji}} Premium servers can assign up to `15` temporary roles per member.",
     "maxTempRolesReachedPremium": "{{denyEmoji}} You have exceeded the limit of temporary roles for the same user (`15`)",
     "alreadyTempRoleAssigned": "{{denyEmoji}} This temporary role is already assigned to the user in my database. Use </temprole manage:1279875172777721989> if you want to remove it.",
-    "removingFromDatabase": "Removing temporary role from my database... {{loadingEmoji}}",
+    "removingFromDatabase": "{{loadingEmoji}} Removing temporary role from my database...",
     "removedFromDatabase": "{{checkEmoji}} Temporary role successfully removed from my database!",
     "reasonTooLong": "{{denyEmoji}} The reason provided exceeds the 50-character limit. Please provide a shorter reason for the temporary role assignment.",
     "reason": "Not specified",

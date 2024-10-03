@@ -63,7 +63,7 @@
     "maxTempRolesReachedRegular": "{{denyEmoji}} Você excedeu o número limite de cargos temporários para o mesmo usuário (`3`)\n> {{hintEmoji}} Servidores Premium podem atribuir até `15` cargos temporários por membro.",
     "maxTempRolesReachedPremium": "{{denyEmoji}} Você excedeu o número limite de cargos temporários para o mesmo usuário (`15`)",
     "alreadyTempRoleAssigned": "{{denyEmoji}} Este cargo temporário já está atribuído ao usuário no meu banco de dados. Use </temprole manage:1279875172777721989> se quiser remover.",
-    "removingFromDatabase": "A apagar o cargo temporário do meu banco de dados... {{loadingEmoji}}",
+    "removingFromDatabase": "{{loadingEmoji}} A apagar o cargo temporário do meu banco de dados...",
     "removedFromDatabase": "{{checkEmoji}} Cargo temporário apagado do meu banco de dados com sucesso!",
     "reasonTooLong": "{{denyEmoji}} O motivo fornecido ultrapassa o limite de 50 caracteres. Por favor, forneça um motivo mais curto para a atribuição do cargo temporário.",
     "reason": "Não específicado",

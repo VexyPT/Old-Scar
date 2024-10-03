@@ -41,6 +41,7 @@ module.exports = {
           { name: "🇵🇹 Português - Portugal", value: "`vexydevpt`", inline: true },
           { name: "🇧🇷 Português - Brasil", value: "`vexydevpt`", inline: true },
           { name: "🇺🇲 English", value: "`vexydevpt`", inline: true },
+          { name: "🇹🇷 Türkçe", value: "`beftli`", inline: true },
         ])
         .setDescription(t("setlanguage.embedDescription", { locale: language }));
         const row = new ActionRowBuilder().addComponents(
@@ -63,6 +64,11 @@ module.exports = {
                 emoji: "🇺🇲",
                 value: "en-US"
               },
+              {
+                label: "Türkçe",
+                emoji: "🇹🇷",
+                value: "tr-TR"
+              }
             ]
           })
         );
