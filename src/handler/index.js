@@ -93,20 +93,19 @@ loadSlashCommands(path.join(__dirname, '../commands/slash'));
     if (!command) return;
     if (command.devOnly && !client.settings.devs.includes(message.author.id)) return;
     if (command.premium) {
-      await interaction.reply({
+      await message.reply({
         content: t("permissions.premiumOnly", {
           locale: userSettings.language,
           replacements: {
             denyEmoji: e.deny
           }
-        }),
-        ephemeral: true
+        })
       });
       return;
     }
 
     if(userSettings.blacklist.isBanned) {
-      return await interaction.reply({
+      return await message.reply({
         content: t("permissions.blacklisted", {
           locale: userSettings.language,
           replacements: {
@@ -114,8 +113,7 @@ loadSlashCommands(path.join(__dirname, '../commands/slash'));
             reason: userSettings.blacklist.reason,
             banDate: `<t:${Math.floor(userSettings.blacklist.since.getTime() / 1000)}:R>`
           }
-        }),
-        ephemeral: false
+        })
       });
     }
 
