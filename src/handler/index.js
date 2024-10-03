@@ -168,8 +168,8 @@ loadSlashCommands(path.join(__dirname, '../commands/slash'));
               locale: userdb.language,
               replacements: {
                 supportServer: client.settings.links.supportServer,
-                reason: userSettings.blacklist.reason,
-                banDate: `<t:${Math.floor(userSettings.blacklist.since.getTime() / 1000)}:R>`
+                reason: userdb.blacklist.reason,
+                banDate: `<t:${Math.floor(userdb.blacklist.since.getTime() / 1000)}:R>`
               }
             }),
             ephemeral: false
