@@ -93,7 +93,7 @@ loadSlashCommands(path.join(__dirname, '../commands/slash'));
     if (!command) return;
     if (command.devOnly && !client.settings.devs.includes(message.author.id)) return;
     if (command.premium) {
-      await message.reply({
+      return await message.reply({
         content: t("permissions.premiumOnly", {
           locale: userSettings.language,
           replacements: {
@@ -101,7 +101,6 @@ loadSlashCommands(path.join(__dirname, '../commands/slash'));
           }
         })
       });
-      return;
     }
 
     if(userSettings.blacklist.isBanned) {
