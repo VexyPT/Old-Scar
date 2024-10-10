@@ -50,86 +50,60 @@ module.exports = {
       });
     }
 
-    // Verificar limites de emojis estáticos e animados
-    const staticLimitReached = staticEmojis >= maxEmojis;
-    const animatedLimitReached = animatedEmojis >= maxAnimatedEmojis;
-
-    if (staticLimitReached && animatedLimitReached) {
-      return interaction.editReply({
-        content: t("emoji.add.bothLimitsReached", {
-          locale: language,
-          replacements: {
-            denyEmoji: e.deny,
-            maxEmojis,
-            maxAnimatedEmojis
-          }
-        })
-      });
-    } else if (staticLimitReached) {
-      return interaction.editReply({
-        content: t("emoji.add.staticLimitReached", {
-          locale: language,
-          replacements: {
-            denyEmoji: e.deny,
-            maxEmojis
-          }
-        })
-      });
-    } else if (animatedLimitReached) {
-      return interaction.editReply({
-        content: t("emoji.add.animatedLimitReached", {
-          locale: language,
-          replacements: {
-            denyEmoji: e.deny,
-            maxAnimatedEmojis
-          }
-        })
-      });
-    }
-
     const addedEmojis = [];
+    let failedCount = 0;
+    let failureReasons = [];
 
     for (const emojiString of emojiMatches) {
       const parsed = parseEmoji(emojiString);
       const link = `https://cdn.discordapp.com/emojis/${parsed.id}${parsed.animated ? '.gif' : '.png'}`;
 
+      // Verificar limites antes de adicionar
+      if (parsed.animated && animatedEmojis >= maxAnimatedEmojis) {
+        failedCount++;
+        failureReasons.push(t("emoji.add.animatedLimitReached", { locale: language, replacements: { maxAnimatedEmojis } }));
+        continue; // Pular para o próximo emoji
+      } else if (!parsed.animated && staticEmojis >= maxEmojis) {
+        failedCount++;
+        failureReasons.push(t("emoji.add.staticLimitReached", { locale: language, replacements: { maxEmojis } }));
+        continue; // Pular para o próximo emoji
+      }
+
       try {
         const emoji = await guild.emojis.create({ attachment: link, name: parsed.name });
         addedEmojis.push(emoji);
       } catch (error) {
-        console.error(error);
-        return interaction.editReply({
-          content: t("emoji.add.errorAdding", {
-            locale: language,
-            replacements: {
-              denyEmoji: e.deny,
-              emojiName: parsed.name
-            }
-          })
-        });
+        failedCount++;
+        failureReasons.push(t("emoji.add.errorAdding", { locale: language, replacements: { emojiName: parsed.name } }));
       }
     }
 
-    if (addedEmojis.length > 1) {
+    // Mensagem de resposta
+    let responseMessage = "";
+    if (addedEmojis.length > 0) {
       const addedEmojiNames = addedEmojis.map(emoji => `${emoji}`).join(" ");
-      await interaction.editReply({
-        content: t("emoji.add.successMultiple", {
-          locale: language,
-          replacements: {
-            checkEmoji: e.check,
-            addedEmojiNames
-          }
-        })
-      });
-    } else {
-      await interaction.editReply({
-        content: t("emoji.add.successSingle", {
-          locale: language,
-          replacements: {
-            addedEmojis
-          }
-        })
+      responseMessage += t("emoji.add.successMultiple", {
+        locale: language,
+        replacements: {
+          checkEmoji: e.check,
+          addedEmojiNames
+        }
       });
     }
+
+    if (failedCount > 0) {
+      const reasonsSummary = failureReasons.join(", ");
+      responseMessage += `\n${t("emoji.add.failedCount", {
+        locale: language,
+        replacements: {
+          denyEmoji: e.deny,
+          failedCount
+        }
+      })}\nMotivos: ${reasonsSummary}`;
+    }
+
+    await interaction.editReply({
+      content: responseMessage
+    });
   }
 };
