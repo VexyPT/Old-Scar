@@ -36,7 +36,7 @@ module.exports = {
     const emojis = options.getString("emojis", true);
     const emojiRegex = /<a?:(.*?):(\d+)>/g;
     const emojiMatches = emojis.match(emojiRegex);
-    const { totalEmojis, staticEmojis, animatedEmojis, maxEmojis, maxAnimatedEmojis } = await checkEmojiLimits(guild);
+    const { staticEmojis, animatedEmojis, maxEmojis, maxAnimatedEmojis } = await checkEmojiLimits(guild);
     const language = (await db.users.get(user)).language;
 
     if (!emojiMatches) {
