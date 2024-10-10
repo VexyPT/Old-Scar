@@ -49,7 +49,7 @@ function emojiId(name) {
     }
   } catch (error) {
     console.error(`Erro ao obter ID do emoji "${name}":`, error);
-    return `:x:`;
+    return `❌`;
   }
 }
 
@@ -71,7 +71,24 @@ const eId = new Proxy({}, {
   }
 });
 
-module.exports = { e, eId };
+async function checkEmojiLimits(guild) {
+  const totalEmojis = guild.emojis.cache.size;
+  const staticEmojis = guild.emojis.cache.filter(emoji => !emoji.animated).size;
+  const animatedEmojis = guild.emojis.cache.filter(emoji => emoji.animated).size;
+
+  const maxEmojis = guild.premiumTier === 0 ? 50 : guild.premiumTier === 1 ? 100 : guild.premiumTier === 2 ? 150 : 250;
+  const maxAnimatedEmojis = maxEmojis; // Ajuste se necessário, por exemplo, se os limites forem diferentes
+
+  return {
+    totalEmojis,
+    staticEmojis,
+    animatedEmojis,
+    maxEmojis,
+    maxAnimatedEmojis,
+  };
+}
+
+module.exports = { e, eId, checkEmojiLimits };
 
 /*
 // Usage examples:

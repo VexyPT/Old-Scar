@@ -138,5 +138,17 @@
     "noMessagesDeleted": "{{denyEmoji}} I couldn't find any messages to delete... I can't delete messages that are older than two weeks due to Discord limitations!",
     "someMessagesDeleted": "{{checkEmoji}} The chat had **{{deletedMessages}}** messages deleted by {{user}}!\n{{denyEmoji}} However, **{{ignoredMessages}}** messages were ignored for being too old or pinned.",
     "allMessagesDeleted": "{{checkEmoji}} The chat had **{{deletedMessages}}** messages deleted by {{user}}!"
+  },
+  "emoji": {
+    "add": {
+      "noValidEmojis": "{{denyEmoji}} No valid emojis found.",
+      "limitReached": "{{denyEmoji}} This server has reached the maximum number of emojis ({{maxEmojis}}).",
+      "staticLimitReached": "{{denyEmoji}} This server has reached the static emoji limit ({{maxEmojis}}).",
+      "animatedLimitReached": "{{denyEmoji}} This server has reached the animated emoji limit ({{maxAnimatedEmojis}}).",
+      "bothLimitsReached": "{{denyEmoji}} This server has reached the maximum limit for static ({{maxEmojis}}) and animated emojis ({{maxAnimatedEmojis}}).",
+      "errorAdding": "{{denyEmoji}} Error adding the emoji {{emojiName}}.",
+      "successMultiple": "{{checkEmoji}} Emojis successfully added: {{addedEmojiNames}}.",
+      "successSingle": "{{addedEmoji}} | Emoji successfully added."
+    }
   }
 }

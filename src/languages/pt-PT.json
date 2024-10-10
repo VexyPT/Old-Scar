@@ -138,5 +138,14 @@
     "noMessagesDeleted": "{{denyEmoji}} Não consegui encontrar nenhuma mensagem para ser deletada... Eu não consigo deletar mensagens que foram enviadas há mais de duas semanas devido a limitações do Discord!",
     "someMessagesDeleted": "{{checkEmoji}} O chat teve **{{deletedMessages}}** mensagens deletadas por {{user}}!\n{{denyEmoji}} Porém, **{{ignoredMessages}}** mensagens foram ignoradas por serem muito antigas ou estarem fixadas.",
     "allMessagesDeleted": "{{checkEmoji}} O chat teve **{{deletedMessages}}** mensagens deletadas por {{user}}!"
+  },
+  "emoji": {
+    "add": {
+      "noValidEmojis": "{{denyEmoji}} Nenhum emoji válido encontrado.",
+      "limitReached": "{{denyEmoji}} Este servidor atingiu o número máximo de emojis ({{maxEmojis}}).",
+      "errorAdding": "{{denyEmoji}} Erro ao adicionar o emoji {{emojiName}}.",
+      "successMultiple": "{{checkEmoji}} Emojis adicionados com sucesso: {{addedEmojiNames}}.",
+      "successSingle": "{{addedEmoji}} | Emoji adicionado com sucesso"
+    }
   }
 }
