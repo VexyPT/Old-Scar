@@ -141,10 +141,13 @@
   },
   "emoji": {
     "add": {
-      "noValidEmojis": "{{denyEmoji}} Nenhum emoji válido encontrado.",
+      "noValidEmojis": "{{denyEmoji}} Nenhum emoji válido encontrado",
       "limitReached": "{{denyEmoji}} Este servidor atingiu o número máximo de emojis ({{maxEmojis}}).",
-      "errorAdding": "{{denyEmoji}} Erro ao adicionar o emoji {{emojiName}}.",
-      "successMultiple": "{{checkEmoji}} Emojis adicionados com sucesso: {{addedEmojiNames}}.",
+      "staticLimitReached": "Este servidor atingiu o limite de emojis estáticos ({{maxEmojis}})",
+      "animatedLimitReached": "Este servidor atingiu o limite de emojis animados ({{maxAnimatedEmojis}})",
+      "errorAdding": "{{denyEmoji}} Erro ao adicionar o emoji {{emojiName}}",
+      "successMultiple": "{{checkEmoji}} Emojis adicionados com sucesso: {{addedEmojiNames}}",
+      "failedCount": "{{denyEmoji}} Não foi possível adicionar **{{failedCount}}** emoji(s)",
       "successSingle": "{{addedEmoji}} | Emoji adicionado com sucesso"
     }
   }

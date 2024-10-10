@@ -141,14 +141,14 @@
   },
   "emoji": {
     "add": {
-      "noValidEmojis": "{{denyEmoji}} No valid emojis found.",
-      "limitReached": "{{denyEmoji}} This server has reached the maximum number of emojis ({{maxEmojis}}).",
-      "staticLimitReached": "{{denyEmoji}} This server has reached the static emoji limit ({{maxEmojis}}).",
-      "animatedLimitReached": "{{denyEmoji}} This server has reached the animated emoji limit ({{maxAnimatedEmojis}}).",
-      "bothLimitsReached": "{{denyEmoji}} This server has reached the maximum limit for static ({{maxEmojis}}) and animated emojis ({{maxAnimatedEmojis}}).",
-      "errorAdding": "{{denyEmoji}} Error adding the emoji {{emojiName}}.",
-      "successMultiple": "{{checkEmoji}} Emojis successfully added: {{addedEmojiNames}}.",
-      "successSingle": "{{addedEmoji}} | Emoji successfully added."
+      "noValidEmojis": "{{denyEmoji}} No valid emojis found",
+      "limitReached": "{{denyEmoji}} This server has reached the maximum number of emojis ({{maxEmojis}})",
+      "staticLimitReached": "This server has reached the static emoji limit ({{maxEmojis}})",
+      "animatedLimitReached": "This server has reached the animated emoji limit ({{maxAnimatedEmojis}})",
+      "errorAdding": "{{denyEmoji}} Error adding the emoji {{emojiName}}",
+      "successMultiple": "{{checkEmoji}} Emojis successfully added: {{addedEmojiNames}}",
+      "failedCount": "{{denyEmoji}} Failed to add **{{failedCount}}** emoji(s)",
+      "successSingle": "{{addedEmoji}} | Emoji successfully added"
     }
   }
 }

@@ -142,13 +142,13 @@
   "emoji": {
     "add": {
       "noValidEmojis": "{{denyEmoji}} Geçerli emoji bulunamadı.",
-      "limitReached": "{{denyEmoji}} Bu sunucu maksimum emoji sayısına ulaştı ({{maxEmojis}}).",
-      "staticLimitReached": "{{denyEmoji}} Bu sunucu maksimum statik emoji sayısına ulaştı ({{maxEmojis}}).",
-      "animatedLimitReached": "{{denyEmoji}} Bu sunucu maksimum animasyonlu emoji sayısına ulaştı ({{maxAnimatedEmojis}}).",
-      "bothLimitsReached": "{{denyEmoji}} Bu sunucu maksimum statik ({{maxEmojis}}) ve animasyonlu emoji ({{maxAnimatedEmojis}}) sayısına ulaştı.",
-      "errorAdding": "{{denyEmoji}} Emoji {{emojiName}} eklenirken hata oluştu.",
-      "successMultiple": "{{checkEmoji}} Emojiler başarıyla eklendi: {{addedEmojiNames}}.",
-      "successSingle": "{{addedEmoji}} | Emoji başarıyla eklendi."
+      "limitReached": "{{denyEmoji}} Bu sunucu maksimum emoji sayısına ulaştı ({{maxEmojis}})",
+      "staticLimitReached": "Bu sunucu maksimum statik emoji sayısına ulaştı ({{maxEmojis}})",
+      "animatedLimitReached": "Bu sunucu maksimum animasyonlu emoji sayısına ulaştı ({{maxAnimatedEmojis}})",
+      "errorAdding": "{{denyEmoji}} Emoji {{emojiName}} eklenirken hata oluştu",
+      "successMultiple": "{{checkEmoji}} Emojiler başarıyla eklendi: {{addedEmojiNames}}",
+      "failedCount": "{{denyEmoji}} **{{failedCount}}** emoji eklenemedi",
+      "successSingle": "{{addedEmoji}} | Emoji başarıyla eklendi"
     }
   }
 }
