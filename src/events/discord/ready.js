@@ -6,7 +6,7 @@ module.exports = {
     execute(client) {
       console.log(`Logged in as ${client.user.tag}`);
 
-      client.user.setActivity("EM BETA", {
+      client.user.setActivity("Still in Beta", {
         type: ActivityType.Playing,
       });
 
