@@ -147,7 +147,7 @@
       "animatedLimitReached": "Este servidor atingiu o limite de emojis animados ({{maxAnimatedEmojis}})",
       "errorAdding": "{{denyEmoji}} Erro ao adicionar o emoji {{emojiName}}",
       "successMultiple": "{{checkEmoji}} Emojis adicionados com sucesso: {{addedEmojiNames}}",
-      "failedCount": "{{denyEmoji}} Não foi possível adicionar **{{failedCount}}** emoji(s)",
+      "failedCount": "{{denyEmoji}} Não foi possível adicionar **{{failedCount}}** emoji(s)\n{{postEmoji}} Motivos:\n{{reasons}}",
       "successSingle": "{{addedEmoji}} | Emoji adicionado com sucesso"
     }
   }

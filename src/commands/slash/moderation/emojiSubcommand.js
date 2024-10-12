@@ -97,9 +97,11 @@ module.exports = {
         locale: language,
         replacements: {
           denyEmoji: e.deny,
-          failedCount
+          failedCount,
+          postEmoji: e.post,
+          reasons: reasonsSummary
         }
-      })}\nMotivos: ${reasonsSummary}`;
+      })}`;
     }
 
     await interaction.editReply({
