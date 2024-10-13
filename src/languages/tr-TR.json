@@ -146,7 +146,7 @@
       "staticLimitReached": "Bu sunucu maksimum statik emoji sayısına ulaştı ({{maxEmojis}})",
       "animatedLimitReached": "Bu sunucu maksimum animasyonlu emoji sayısına ulaştı ({{maxAnimatedEmojis}})",
       "errorAdding": "{{denyEmoji}} Emoji {{emojiName}} eklenirken hata oluştu",
-      "successMultiple": "{{checkEmoji}} Emojiler başarıyla eklendi: {{addedEmojiNames}}",
+      "successMultiple": "{{checkEmoji}} Emojiler başarıyla eklendi: {{addedEmoji}}",
       "failedCount": "{{denyEmoji}} **{{failedCount}}** emoji eklenemedi\n{{postEmoji}} Nedenler:\n{{reasons}}",
       "successSingle": "{{addedEmoji}} | Emoji başarıyla eklendi"
     }
