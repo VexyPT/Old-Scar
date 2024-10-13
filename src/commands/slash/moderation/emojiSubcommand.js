@@ -81,14 +81,26 @@ module.exports = {
     // Mensagem de resposta
     let responseMessage = "";
     if (addedEmojis.length > 0) {
-      const addedEmojiNames = addedEmojis.map(emoji => `${emoji}`).join(" ");
-      responseMessage += t("emoji.add.successMultiple", {
-        locale: language,
-        replacements: {
-          checkEmoji: e.check,
-          addedEmojiNames
-        }
-      });
+      console.log(addedEmojis);
+      console.log(addedEmojis.length);
+      if (addedEmojis.length == 1) {
+        const addedEmojiNames = addedEmojis.map(emoji => `${emoji}`).join(" ");
+        responseMessage += t("emoji.add.successSingle", {
+          locale: language,
+          replacements: {
+            addedEmoji: addedEmojiNames
+          }
+        });
+      } else {
+        const addedEmojiNames = addedEmojis.map(emoji => `${emoji}`).join(" ");
+        responseMessage += t("emoji.add.successMultiple", {
+          locale: language,
+          replacements: {
+            checkEmoji: e.check,
+            addedEmoji: addedEmojiNames
+          }
+        });
+      }
     }
 
     if (failedCount > 0) {
