@@ -113,7 +113,7 @@ module.exports = {
     let responseMessage;
     if (deletedMessages === 0) {
       responseMessage = t("clearCommand.noMessagesDeleted", { locale: language, replacements: { denyEmoji: e.deny } });
-    } else if (deletedMessages < amount) {
+    } else if (deletedMessages < amount && ignoredMessages != 0) {
       responseMessage = t("clearCommand.someMessagesDeleted", { locale: language, replacements: { checkEmoji: e.check, denyEmoji: e.deny, deletedMessages, ignoredMessages, user } });
     } else {
       responseMessage = t("clearCommand.allMessagesDeleted", { locale: language, replacements: { checkEmoji: e.check, deletedMessages, user } });
