@@ -146,7 +146,7 @@
       "staticLimitReached": "This server has reached the static emoji limit ({{maxEmojis}})",
       "animatedLimitReached": "This server has reached the animated emoji limit ({{maxAnimatedEmojis}})",
       "errorAdding": "{{denyEmoji}} Error adding the emoji {{emojiName}}",
-      "successMultiple": "{{checkEmoji}} Emojis successfully added: {{addedEmojiNames}}",
+      "successMultiple": "{{checkEmoji}} Emojis successfully added: {{addedEmoji}}",
       "failedCount": "{{denyEmoji}} Failed to add **{{failedCount}}** emoji(s)\n{{postEmoji}} Reasons:\n{{reasons}}",
       "successSingle": "{{addedEmoji}} | Emoji successfully added"
     }
