@@ -1,5 +1,5 @@
 const { ComponentType, EmbedBuilder } = require("discord.js");
-const { t, db, color, e } = require("../../utils/index.js");
+const { t, db, color, e } = require("../../utils");
 const TempRole = require("../../models/TempRoleSettings.js");
 const Component = require("../../utils/component.js");
 
