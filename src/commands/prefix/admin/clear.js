@@ -13,7 +13,6 @@ module.exports = {
     const language = (await db.users.get(author)).language;
     const botMember = await guild.members.fetch(client.user.id);
 
-    // Verificar permissões do membro
     if (!member.permissions.has(PermissionFlagsBits.ManageMessages)) {
       return message.reply({
         content: t("clearCommand.noPermission", {
@@ -23,7 +22,6 @@ module.exports = {
       });
     }
 
-    // Verificar permissões do bot
     if (!botMember.permissions.has(PermissionFlagsBits.ManageMessages)) {
       return message.reply({
         content: t("clearCommand.botNoPermission", {
