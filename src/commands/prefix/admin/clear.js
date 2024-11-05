@@ -33,7 +33,6 @@ module.exports = {
 
     const amount = parseInt(args[0], 10);
 
-    // Verificar se a quantidade está no limite permitido (2 a 1000)
     if (isNaN(amount) || amount < 2 || amount > 1000) {
       return message.reply({
         content: t("clearCommand.invalidAmount", {
