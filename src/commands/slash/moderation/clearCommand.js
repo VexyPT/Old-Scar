@@ -31,7 +31,6 @@ module.exports = {
     const userdb = await db.users.get(user);
     const language = userdb.language;
 
-    // Verificar permissões do membro
     if (!member.permissions.has(PermissionFlagsBits.ManageMessages)) {
       return interaction.reply({
         content: t("clearCommand.noPermission", {
@@ -43,7 +42,7 @@ module.exports = {
         ephemeral: true
       });
     }
-    // Verificar permissões do bot
+    
     if (!botMember.permissions.has(PermissionFlagsBits.ManageMessages)) {
       return interaction.reply({
         content: t("clearCommand.botNoPermission", {
